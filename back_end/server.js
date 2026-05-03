@@ -16,8 +16,12 @@ app.use(express.json());
 
 
 const frontendDir = path.join(__dirname, '..', 'front_end');
-app.use("/front_end", express.static(frontendDir));
 
+app.use(express.static(frontendDir));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'front_end', 'html', 'index.html'));
+});
 app.use((req, res, next) => {
   console.log('REQ', req.method, req.url);
   next();
