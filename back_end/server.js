@@ -33,7 +33,7 @@ rotas(app);
 
 const port = process.env.PORT || 4000
 
-app.get('/', (req, res) => {
+app.get('/index.html', (req, res) => {
   res.send('Hello World!')
 })
 
