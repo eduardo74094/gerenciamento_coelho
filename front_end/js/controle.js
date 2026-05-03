@@ -1,4 +1,4 @@
-const apiurl = 'http://localhost:3000';
+const apiurl = 'window.location.origin';
 const ADMIN_EMAIL = 'admin@gmail.com';
 const isAdminEmail = (e) => (e || '').toLowerCase() === ADMIN_EMAIL;
 let usuarios = [];
