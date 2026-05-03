@@ -16,17 +16,8 @@ app.use(express.json());
 
 
 const frontendDir = path.join(__dirname, '..', 'front_end');
+app.use("/front_end", express.static(frontendDir));
 
-app.use(express.static(frontendDir));
-app.get('/teste', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'front_end', 'html', 'index.html'));
-});
-app.get('/', (req, res) => {
-  res.redirect('/html/index.html');
-});
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'front_end', 'html', 'index.html'));
-});
 app.use((req, res, next) => {
   console.log('REQ', req.method, req.url);
   next();
@@ -52,3 +43,7 @@ app.listen(PORT, () => {
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 28ec6364a96d8aabe9055702aaee4f849432f649
