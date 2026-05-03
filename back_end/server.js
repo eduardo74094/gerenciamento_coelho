@@ -18,7 +18,9 @@ app.use(express.json());
 const frontendDir = path.join(__dirname, '..', 'front_end');
 
 app.use(express.static(frontendDir));
-
+app.get('/', (req, res) => {
+  res.redirect('/html/index.html');
+});
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'front_end', 'html', 'index.html'));
 });
