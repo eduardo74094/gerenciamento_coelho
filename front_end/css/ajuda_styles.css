@@ -1,0 +1,122 @@
+body {
+      font-family: Arial, sans-serif;
+      background-color: #a0e3c0;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #b3f0c7;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #16a085;
+      font-size: 1.8em;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #16a085;
+      padding-bottom: 5px;
+    }
+    p {
+      color: #2c3e50;
+      line-height: 1.6;
+      margin: 15px 0;
+    }
+    .intro {
+      background: #ccf2dd;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    img {
+      width: 100%;
+      max-width: 700px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+      margin: 15px auto;
+      display: block;
+    }
+    img.img-ficha {
+      max-width: 500px;
+    }
+    .back-button {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .back-button a {
+      background-color: #16a085;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 16px;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+    .back-button a:hover {
+      background-color: #138871;
+    }
+
+/* Responsividade para Mobile */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 20px 15px;
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+  }
+
+  h2 {
+    font-size: 1.4em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 14px;
+    margin: 10px 0;
+  }
+
+  .intro {
+    padding: 15px;
+  }
+
+  img {
+    max-width: 100%;
+    margin: 10px auto;
+  }
+
+  img.img-ficha {
+    max-width: 100%;
+  }
+
+  .back-button {
+    margin-top: 20px;
+  }
+
+  .back-button a {
+    padding: 10px 20px;
+    font-size: 14px;
+    width: auto;
+    max-width: 200px;
+    display: block;
+    margin: 0 auto;
+  }
+}

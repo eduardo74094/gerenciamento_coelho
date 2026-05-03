@@ -1,0 +1,148 @@
+body {
+  background-color: #66d3aa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: #ccf2dd;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px;
+}
+
+.container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #004d1a;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #66cc66;
+  border-radius: 5px;
+  outline: none;
+}
+
+button {
+  background-color: #00b300;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #009900;
+}
+
+.links {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.links a {
+  color: #3399ff;
+  text-decoration: none;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+a.button {
+  display: block;
+  text-align: center;
+  background-color: #00b300;
+  color: white;
+  padding: 10px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+a.button:hover {
+  background-color: #009900;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.iffar-logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.system-name {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #004d1a;
+  margin: 10px 0 0 0;
+}
+
+/* Responsividade para Mobile */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 25px 20px;
+    width: 95%;
+    max-width: 100%;
+  }
+
+  .container h2 {
+    font-size: 1.5em;
+  }
+
+  .logo-container {
+    margin-bottom: 15px;
+  }
+
+  .iffar-logo {
+    width: 80px;
+  }
+
+  .system-name {
+    font-size: 1.4em;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  button {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  a.button {
+    padding: 12px;
+    font-size: 16px;
+  }
+}
+

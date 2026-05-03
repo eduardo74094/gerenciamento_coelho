@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adicionar Matriz</title>
+  <link rel="stylesheet" href="/front_end/css/fichas_styles.css" />
+</head>
+<body>
+  <form id="formMatriz">
+    <div class="container">
+      <div class="form-box">
+        <div class="left">
+          
+          <label for="data_cobertura">Data de Cobertura
+            <input type="date" id="data_cobertura" name="data_cobertura">
+          </label>
+<label for="numero_reprodutor">Reprodutor
+          <input type="number" id="numero_reprodutor" >
+        </label>
+          <label for="data_palpação">Data de Palpação
+            <input type="date" id="data_palpação" name="data_palpação">
+          </label>
+
+          <label for="palpação_resultado">Resultado da Palpação
+            <select id="palpação_resultado" name="palpação_resultado">
+              <option value="">Selecione...</option>
+              <option value="Positiva">Positiva</option>
+              <option value="Negativa">Negativa</option>
+              <option value="Inconclusiva">Inconclusiva</option>
+            </select>
+          </label>
+
+          <label for="ninho">Ninho
+            <input type="number" id="ninho" name="ninho" min="1">
+          </label>
+<label for="data_parto">Data de Parto
+            <input type="date" id="data_parto" name="data_parto" required>
+          </label>
+          <label for="laparos">Láparos vivos
+            <input type="number" id="laparos" name="laparos">
+          </label>
+        </div>
+
+        <div class="right">
+          <label for="laparos_mortos">Láparos Mortos
+            <input type="number" id="laparos_mortos" name="laparos_mortos">
+          </label>
+
+          <label for="laparos_transferidos">quantidade Láparos Transferidos
+            <input type="number" id="laparos_transferidos" name="laparos_transferidos">
+          </label>
+
+          <label for="peso_total_ninhada">Peso Total Ninhada
+            <input type="text" id="peso_total_ninhada" name="peso_total_ninhada">
+          </label>
+<label for="peso_total_pos_ninhada">Peso Total pos Ninhada
+            <input type="text" id="peso_total_pos_ninhada" name="peso_total_pos_ninhada">
+          </label>
+          <label for="data_desmame">Data Desmame
+            <input type="date" id="data_desmame" name="data_desmame">
+          </label>
+
+          <label for="total_desmame">Total Desmame
+            <input type="number" id="total_desmame" name="total_desmame">
+          </label>
+
+         
+
+          <!-- id_coelho now provided via querystring ?coelho_id=...; removed manual input -->
+
+          <div class="buttons">
+            <button type="button" onclick="salvar()">salvar</button>
+            <button id="btnVoltar" type="button" onclick="voltar()">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <script src="/front_end/js/adicionar_matriz.js"></script>
+</body>
+</html>

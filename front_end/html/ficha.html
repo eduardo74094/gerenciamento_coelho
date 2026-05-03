@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ficha do Coelho</title>
+  <link rel="stylesheet" href="/front_end/css/fichas_styles.css" />
+
+  <script>
+    function clicarbotao() {
+      window.location.href = 'index.html';
+    }
+
+    function clicarbotao2() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+
+      if (!id) {
+        alert("ID do coelho não encontrado.");
+        return;
+      }
+
+      window.location.href = `editar.html?id=${id}`;
+    }
+
+    function clicarbotao3() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  if (!id) {
+    alert("ID do coelho não encontrado.");
+    return;
+  }
+
+  const tipo = document.getElementById('tipo_coelho').value;
+
+  if (tipo === 'Matriz') {
+    window.location.href = `index_matriz.html?coelho_id=${id}`;
+  } else if (tipo === 'Reprodutor') {
+    window.location.href = `index_reprodutor.html?coelho_id=${id}`;
+  } else if (tipo === 'Láparo' || tipo === 'em crescimento') {
+    alert('Este tipo não possui cruzamentos.');
+  } else {
+    alert('Tipo de coelho desconhecido.');
+  }
+}
+    
+
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="form-box">
+      <div class="left">
+        <label for="numero_coelho">Número
+          <input type="text" id="numero_coelho" name="numero_coelho" readonly>
+        </label>
+
+        <label for="raca_coelho">Raça
+          <input type="text" id="raca_coelho" name="raca_coelho" readonly>
+        </label>
+
+        <label for="data_nascimento_coelho">Data Nasc
+          <input type="date" id="data_nascimento_coelho" name="data_nascimento_coelho" readonly>
+        </label>
+
+        <label for="peso_nascimento">Peso ao Nascer
+          <input type="text" id="peso_nascimento" name="peso_nascimento" readonly>
+        </label>
+
+        <label for="data_desmame">Data Desmame
+          <input type="date" id="data_desmame" name="data_desmame" readonly>
+        </label>
+<label for="peso_desmame">Peso ao Desmame (kg)
+  <input type="text" step="0.01" id="peso_desmame" name="peso_desmame" placeholder="Ex: 1.2">
+</label>
+        <label for="peso_atual">Peso Atual
+          <input type="text" id="peso_atual" name="peso_atual" readonly>
+        </label>
+      </div>
+
+      <div class="right">
+        <label for="nome_coelho">Nome
+          <input type="text" id="nome_coelho" name="nome_coelho" readonly>
+        </label>
+
+        <label for="sexo_coelho">Sexo
+          <select id="sexo_coelho" name="sexo_coelho"  readonly>
+          <option value="Macho">Macho</option>
+          <option value="Fêmea">Fêmea</option>
+         </select>
+         </label>
+
+         <label for="tipo_coelho">Tipo
+         <select id="tipo_coelho" name="tipo_coelho"  readonly>
+         <option value="Matriz">Matriz</option>
+         <option value="Reprodutor">Reprodutor</option>
+         <option value="Láparo">Láparo</option>
+         <option value="em crescimento">em crescimento</option>
+         </select>
+         </label>
+
+
+          <label for="situacao_coelho">Situação
+           <select id="situacao_coelho" name="situacao_coelho" required>
+             <option value="ativo">Ativo</option>
+             <option value="inativo">Inativo</option>
+             <option value="transferido">Transferido</option>
+           </select>
+         </label>
+
+          <label for="transferido_coelho">Transferido Para
+            <input type="number" id="transferido_coelho" name="transferido_coelho" readonly>
+          </label>
+
+          <label for="matriz_coelho">Afiliação materna
+            <input type="number" id="matriz_coelho" name="matriz_coelho" readonly >
+          </label>
+
+          <label for="reprodutor_coelho">Afiliação paterna
+            <input type="number" id="reprodutor_coelho" name="reprodutor_coelho" readonly>
+          </label>
+
+       <label for="observacoes_coelho">Observações
+          <textarea id="observacoes_coelho" name="observacoes_coelho" readonly rows="4"></textarea>
+         </label>
+
+        <input type="hidden" id="id_usuario" name="id_usuario">
+
+        <div class="buttons">
+          <button class="back" type="button" onclick="clicarbotao2()">Editar</button>
+          <button id="botaocruzas" class="back" type="button" onclick="clicarbotao3()">Cruzamentos</button>
+          <button class="back" type="button" onclick="clicarbotao()">Voltar</button>
+     </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/front_end/js/ficha.js"></script>
+</body>
+</html>

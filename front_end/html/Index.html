@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CarrotLog - Sistema de Gerenciamento de Cunicultura</title>
+  <link rel="stylesheet" href="/front_end/css/index_styles.css" />
+</head>
+<body>
+  <div class="system-header">
+    <div class="title-container">
+      <img src="/front_end/src/iffar_logo.png" alt="Logo IFFar" class="header-logo">
+      <h1 class="system-title" >CarrotLog</h1>
+    </div>
+    <p class="system-subtitle">Sistema de Gerenciamento de Cunicultura no Instituto Federal Farroupilha</p>
+  </div>
+
+  <div class="container">
+    <div class="user-info-container">
+      <div class="user-badge" id="userBadge">
+        <span class="user-icon">👤</span>
+        <span id="userName">Usuário</span>
+        <div class="user-menu" id="userMenu">
+          <button onclick="fazerLogout()">Sair</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Procurar..." />
+        </div>
+        <div class="filter-box">
+          <select id="typeFilter">
+            <option value="Matriz">Matrizes</option>
+            <option value="Reprodutor">Reprodutores</option>
+            <option value="Láparo">Láparos</option>
+            <option value="em crescimento">Em crescimento</option>
+          </select>
+        </div>
+        <div class="filter-box">
+          <select id="statusFilter">
+            
+            <option value="ativo">Ativos</option>
+            <option value="inativo">Inativos</option>
+            <option value="transferido">Transferidos</option>
+          </select>
+        </div>
+      </div>
+      <div class="toolbar-right">
+        <div class="add-button">
+          <button onclick="clicarbotao()">Adicionar</button>
+        </div>
+      </div>
+    </div>
+
+
+    <table>
+      <thead>
+        <tr>
+          <th>Número</th>
+          <th>Nome</th>
+          <th>Raça</th>
+          <th>Matriz</th>
+          <th>Reprodutor</th>
+        </tr>
+      </thead>
+      <tbody id="coelhoTableBody"></tbody>
+    </table>
+
+  </div>
+
+  <div class="help-container">
+    <a href="/front_end/html/ajuda.html" class="help-link">Ajuda</a>
+  </div>
+
+  <script src="/front_end/js/index.js"></script>
+</body>
+</html>
+
+
+
+
