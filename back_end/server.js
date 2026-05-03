@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 app.get('/health', (req, res) => res.json({ok: true}));
 rotas(app);
 
-const PORT = process.env.PORT || 3000;
+
 
 
 const express = require('express')
