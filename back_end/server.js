@@ -26,20 +26,12 @@ app.use((req, res, next) => {
 app.get('/health', (req, res) => res.json({ok: true}));
 rotas(app);
 
+const PORT = process.env.PORT || 3000;
 
+app.listen(PORT, () => {
+  console.log("Servidor ligado!");
+});
 
-
-
-
-const port = process.env.PORT || 4000
-
-app.get('/index.html', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
 
 
 
