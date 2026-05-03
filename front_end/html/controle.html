@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciamento de Usuários</title>
+    <link rel="stylesheet" href="/front_end/css/index_styles.css">
+  <link rel="stylesheet" href="/front_end/css/controle_styles.css">
+</head>
+<body class="controle-page">
+  <div class="container controle-container">
+    <div id="messageArea" class="message"></div>
+
+    <div class="toolbar">
+      <div class="toolbar-left"></div>
+      <div class="toolbar-right" style="display:flex; gap:8px;">
+        <div class="add-button">
+          <button id="addUserBtn">Adicionar Usuário</button>
+        </div>
+        <div class="add-button">
+          <button class="exit" id="logoutBtn">Sair</button>
+        </div>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>ID Usuário</th>
+          <th>Nome</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="userTable">
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal de Formulário de Usuário (Adicionar/Editar) -->
+  <div class="modal-overlay" id="userFormModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="userFormTitle">
+      <header>
+        <span id="userFormTitle">Novo Usuário</span>
+      </header>
+      <div class="form-box">
+        <div class="left">
+          <label for="nome_usuario">Nome
+            <input type="text" id="nome_usuario" maxlength="100" required />
+          </label>
+          <label for="email_usuario">Email
+            <input type="email" id="email_usuario" maxlength="300" required />
+          </label>
+          <label for="tipo_usuario">Tipo de Usuário
+            <select id="tipo_usuario">
+              <option value="">Padrão</option>
+              <option value="aluno">Aluno</option>
+            </select>
+          </label>
+        </div>
+        <div class="right">
+          <label for="senha_usuario">Senha
+            <input type="password" id="senha_usuario" placeholder="Mínimo 8 caracteres" minlength="8" />
+          </label>
+          <div class="buttons">
+            <button type="button" class="update" id="saveUserForm">Confirmar</button>
+            <button type="button" class="delete" id="deleteUserBtn">Excluir</button>
+            <button type="button" class="back" id="cancelUserForm">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmação -->
+  <div class="modal-overlay" id="confirmModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+      <div class="container">
+        <h2 id="confirmTitle">Confirmação</h2>
+        <p id="confirmMessage">Tem certeza?</p>
+        <div class="buttons">
+          <button type="button" class="back" id="confirmNo">Não</button>
+          <button type="button" class="delete" id="confirmYes">Sim</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="/front_end/js/controle.js"></script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adicionar Reprodutor</title>
+  <link rel="stylesheet" href="/front_end/css/fichas_styles.css" />
+</head>
+<body>
+  <form id="formRep">
+    <div class="container">
+      <div class="form-box">
+        <div class="left">
+          <label for="data_acasalamento">Data Acasalamento
+            <input type="date" id="data_acasalamento" name="data_acasalamento" required>
+          </label>
+
+          <label for="numero_laparos">Nº Láparos
+            <input type="number" id="numero_laparos" name="numero_laparos">
+          </label>
+
+          <label for="peso_total_ninhada">Peso Total Ninhada
+            <input type="text" id="peso_total_ninhada" name="peso_total_ninhada">
+          </label>
+           <label for="peso_total_pos_ninhada">Peso Total pos Ninhada
+            <input type="text" id="peso_total_pos_ninhada" name="peso_total_pos_ninhada">
+          </label>
+        </div>
+
+        <div class="right">
+          <label for="numero_matriz">Nº Matriz
+            <input type="number" id="numero_matriz" name="numero_matriz" required min="1">
+          </label>
+
+          <div class="buttons">
+            <button type="button" onclick="salvar()">Salvar</button>
+            <button id="btnVoltar" type="button" onclick="voltar()">Voltar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <script src="/front_end/js/adicionar_reprodutor.js"></script>
+</body>
+</html>

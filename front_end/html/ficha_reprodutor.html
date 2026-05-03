@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ficha Reprodutor</title>
+  <link rel="stylesheet" href="/front_end/css/fichas_styles.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="form-box">
+      <div class="left">
+        <label for="data_acasalamento">Data Acasalamento
+          <input type="date" id="data_acasalamento" readonly>
+        </label>
+
+        <label for="numero_laparos">Nº Láparos
+          <input type="number" id="numero_laparos" readonly>
+        </label>
+
+        <label for="peso_total_ninhada">Peso Total Ninhada
+          <input type="text" id="peso_total_ninhada" readonly>
+        </label>
+        <label for="peso_total_pos_ninhada">Peso Total pos Ninhada
+          <input type="text" id="peso_total_pos_ninhada" readonly>
+        </label>
+      </div>
+
+      <div class="right">
+        <label for="numero_matriz">Matriz
+          <input type="number" id="numero_matriz" readonly>
+        </label>
+
+        <div class="buttons">
+          <button type="button" onclick="editar()">Editar</button>
+          <button type="button" onclick="excluir()">Excluir</button>
+          <button type="button" onclick="voltar()">Voltar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/front_end/js/ficha_reprodutor.js"></script>
+</body>
+</html>
