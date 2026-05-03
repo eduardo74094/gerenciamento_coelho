@@ -1,9 +1,9 @@
 {
   "name": "coelhos_",
   "version": "1.0.0",
-  "main": "index.js",
+ "main": "back_end/server.js",
   "scripts": {
-    "start": "npx nodemon index.js"
+     "start": "node back_end/server.js"
   },
   "keywords": [],
   "author": "",
