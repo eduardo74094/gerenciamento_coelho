@@ -15,7 +15,7 @@ Database.conectar(
 app.use(express.json());
 
 
-const frontendDir = path.join(__dirname, 'front_end');
+const frontendDir = path.join(__dirname, '..', 'front_end');
 app.use("/front_end", express.static(frontendDir));
 
 app.use((req, res, next) => {
@@ -25,9 +25,7 @@ app.use((req, res, next) => {
 
 app.get('/health', (req, res) => res.json({ok: true}));
 rotas(app);
-app.get('/', (req, res) => {
-  res.sendFile(path.join(frontendDir, 'html', 'controle.html'));
-});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
