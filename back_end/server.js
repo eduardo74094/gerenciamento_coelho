@@ -26,8 +26,10 @@ app.use((req, res, next) => {
 app.get('/health', (req, res) => res.json({ok: true}));
 rotas(app);
 
-app.listen(3000, () => {
-  console.log("Servidor ligado na porta 3000!");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log("Servidor ligado!");
 });
 
 
