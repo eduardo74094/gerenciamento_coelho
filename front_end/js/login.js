@@ -10,10 +10,11 @@ async function loginUsuario() {
 
   try {
     const response = await fetch("/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, senha }),
-    });
+  method: "POST",
+  credentials: "include",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ email, senha }),
+});
 
     if (response.ok) {
       const data = await response.json();
@@ -27,7 +28,7 @@ async function loginUsuario() {
       if (emailLower === 'admin@gmail.com') {
         window.location.href = '/admin';
       } else {
-        window.location.href = 'index.html';
+        window.location.href = '/html/index.html';
       }
     } else {
       alert("Email ou senha inválidos.");

@@ -1,4 +1,4 @@
-const apiurl = 'http://localhost:3000';
+const apiurl = '';
 const params = new URLSearchParams(window.location.search);
 const id = params.get('id');
 let coelhoId = params.get('coelho_id');
@@ -20,7 +20,7 @@ window.onload = async () => {
       document.getElementById('data_cobertura').value = matriz.data_cobertura ? matriz.data_cobertura.slice(0,10) : '';
       document.getElementById('data_palpação').value = matriz.data_palpação ? matriz.data_palpação.slice(0,10) : '';
       document.getElementById('palpação_resultado').value = matriz.palpação_resultado || '';
-      document.getElementById('ninho').value = matriz.ninho || '';
+      document.getElementById('data_ninho').value = matriz.data_ninho ? matriz.data_ninho.slice(0,10) : '';
       document.getElementById('laparos').value = matriz.laparos || '';
       document.getElementById('laparos_mortos').value = matriz.laparos_mortos || '';
       document.getElementById('laparos_transferidos').value = matriz.laparos_transferidos || '';
@@ -40,7 +40,7 @@ async function salvar(){
     data_cobertura: document.getElementById('data_cobertura').value || null,
     data_palpação: document.getElementById('data_palpação').value || null,
     palpação_resultado: document.getElementById('palpação_resultado').value || null,
-  ninho: (Number.isNaN(parseInt(document.getElementById('ninho').value)) ? null : parseInt(document.getElementById('ninho').value)),
+      data_ninho: document.getElementById('data_ninho').value || null,
   laparos: (Number.isNaN(parseInt(document.getElementById('laparos').value)) ? null : parseInt(document.getElementById('laparos').value)),
   laparos_mortos: (Number.isNaN(parseInt(document.getElementById('laparos_mortos').value)) ? null : parseInt(document.getElementById('laparos_mortos').value)),
   laparos_transferidos: (Number.isNaN(parseInt(document.getElementById('laparos_transferidos').value)) ? null : parseInt(document.getElementById('laparos_transferidos').value)),

@@ -161,3 +161,16 @@ body.controle-page { display: block; height: auto; padding: 20px; }
 	outline: none;
 	box-shadow: none;
 }
+#addUserBtn {
+	  padding: 10px; border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer; 
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 12px 24px;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+}
+#addUserBtn:hover {
+	 background-color: #005500;
+}

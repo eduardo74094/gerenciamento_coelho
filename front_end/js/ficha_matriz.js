@@ -20,7 +20,7 @@ window.onload = async () => {
     document.getElementById('data_cobertura').value = matriz.data_cobertura ? matriz.data_cobertura.slice(0,10) : '';
     document.getElementById('data_palpação').value = matriz.data_palpação ? matriz.data_palpação.slice(0,10) : '';
   document.getElementById('palpação_resultado').value = matriz.palpação_resultado ?? '';
-  document.getElementById('ninho').value = matriz.ninho ?? '';
+ document.getElementById('data_ninho').value = matriz.data_ninho ? matriz.data_ninho.slice(0,10) : '';
   document.getElementById('laparos').value = matriz.laparos ?? '';
   document.getElementById('laparos_mortos').value = matriz.laparos_mortos ?? '';
   document.getElementById('laparos_transferidos').value = matriz.laparos_transferidos ?? '';

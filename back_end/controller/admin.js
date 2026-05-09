@@ -159,7 +159,7 @@ app.post('/alterarSenha', async (req, res) => {
   // Serve admin panel (controle.html) for admins only
   app.get('/admin', requireAdmin, (req, res) => {
     // Redirect to the static file to avoid any path resolution issues
-    res.redirect('/front_end/html/controle.html');
+    res.redirect('/html/controle.html');
   });
 
   // Logout clears admin flag
