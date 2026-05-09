@@ -1,18 +1,22 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #05964b;
+background: linear-gradient(135deg, #14532d, #114e2d);
+min-height: 100vh;
   margin: 0;
   padding: 20px;
 }
 
 .container {
-  max-width: 800px;
+  
   margin: auto;
-  background: #b3f0c7;
+ background: rgba(255,255,255,0.92);
+backdrop-filter: blur(8px);
   border-radius: 20px;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+ box-shadow: 0 10px 30px rgba(0,0,0,0.15);
   position: relative;
+  max-width:1200px;
+width:100%;
 }
 
 .user-info-container {
@@ -114,6 +118,7 @@ body {
   border: 1px solid #8dd7af;
   font-size: 16px;
   background-color: #d2f4e1;
+   height:52px;
 }
 
 .search-box input:focus {
@@ -123,12 +128,13 @@ body {
 }
 
 .filter-box select {
-  padding: 8px;
+  padding:14px 18px;
   border-radius: 20px;
   border: 1px solid #8dd7af;
   font-size: 16px;
   background-color: #d2f4e1;
   cursor: pointer;
+   width:260px;
 }
 
 .filter-box select:focus {
@@ -140,8 +146,12 @@ body {
 table {
   width: 100%;
   border-collapse: collapse;
-background-color: #ebece3
-  
+tr{
+  transition: 0.2s ease;
+}
+tr:hover{
+  background: #f5f5f5;
+}
 }
 
 th, td {
@@ -162,11 +172,13 @@ th {
 .add-button button {
   background-color: #16a085;
   color: white;
-  padding: 10px 20px;
+  padding: 14px 30px;
   border: none;
   border-radius: 25px;
   cursor: pointer;
   font-size: 16px;
+   width:170px;
+  height: 50px;
 }
 
 /* RESET GERAL */
@@ -199,15 +211,15 @@ th {
 .system-title {
   font-size: 2.5em;
   font-weight: bold;
-  color: #000000;
+  color: #b9b7b7;
   margin: 0;
   padding: 0;
 }
 
 .system-subtitle {
   font-size: 1.1em;
-  color: #000000;
-  margin: 10px 0 0 0;
+   color: #b9b7b7;
+margin: 10px 0 0 0;
   padding: 0;
 }
 
@@ -215,10 +227,12 @@ th {
   text-align: center;
   margin: 20px 0;
   padding: 10px;
+  height: 100;
+  width: 100;
 }
 
 .help-link {
-  color: #000000;
+   color: #b9b7b7;
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
