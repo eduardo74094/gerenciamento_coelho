@@ -1,5 +1,5 @@
 let todosOsCoelhos = [];
-const apiurl = "http://localhost:3000";
+const apiurl = "https://gerenciamento-coelhos.onrender.com";
 
 function normalizeStr(s) {
   return (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
