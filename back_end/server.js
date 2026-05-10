@@ -4,7 +4,7 @@ const express = require("express");
 const path = require('path');
 const Database = require('./database');
 const { rotas } = require("./controller/admin"); 
-
+const cors = require('cors');
 const app = express();
 app.use(cors());
 app.use(cookieParser(process.env.COOKIE_SECRET || 'gc-secret-dev'));
