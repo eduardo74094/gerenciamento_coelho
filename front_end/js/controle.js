@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) logoutBtn.addEventListener('click', async () => {
     try { await fetch(apiurl + '/logout', { method: 'POST' }); } catch (e) {}
-    window.location.href = '/front_end/html/login.html';
+    window.location.href = 'https://gerenciamento-coelho.onrender.com';
   });
   // wiring modal eventos
   setupModals();
