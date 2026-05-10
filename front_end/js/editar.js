@@ -1,4 +1,4 @@
-const apiurl = "http://localhost:3000";
+const apiurl = "https://gerenciamento-coelho.onrender.com";
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
