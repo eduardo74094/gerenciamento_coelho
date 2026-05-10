@@ -1,4 +1,4 @@
-const apiurl = "http://localhost:3000";
+const apiurl = "https://gerenciamento-coelho.onrender.com";
 
 function initReprodutoresPage() {
   aplicarRestricoesAluno();
