@@ -6,7 +6,7 @@ const Database = require('./database');
 const { rotas } = require("./controller/admin"); 
 
 const app = express();
-
+app.use(cors());
 app.use(cookieParser(process.env.COOKIE_SECRET || 'gc-secret-dev'));
 
 Database.conectar();
