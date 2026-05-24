@@ -31,7 +31,11 @@ window.onload = async () => {
   document.getElementById("observacoes_coelho").value = coelho.observacoes_coelho || "";
   document.getElementById("situacao_coelho").value = coelho.situacao_coelho || coelho.situacao || "";
   document.getElementById("transferido_coelho").value = coelho.transferido_coelho || "";
+const foto = document.getElementById("fotoPreview");
 
+if (coelho.foto_coelho) {
+  foto.src = `${apiurl}/uploads/${coelho.foto_coelho}`;
+}
   esconderbotaolaparo();
 
   } catch (err) {
