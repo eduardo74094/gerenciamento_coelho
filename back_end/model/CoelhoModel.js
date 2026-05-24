@@ -50,7 +50,7 @@ return res && res[0] ? res[0] : null;
 }
 async  selectCoelhos(){
  
-    const res= await Database.query("Select * from  coelho ");
+    const res= await Database.query("Select * from  coelho  ORDER BY nome_coelho ASC ");
     return res;
 }
 async  selectCoelhos_por_id(id){
