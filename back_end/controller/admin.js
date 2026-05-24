@@ -302,7 +302,7 @@ app.patch(
         dados.foto_coelho
       );
 
-      await CoelhoModel.updateCoelho(
+      await CoelhosRota.updateCoelho(
         req.params.id,
         dados
       );
