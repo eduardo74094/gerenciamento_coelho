@@ -4,7 +4,7 @@ const{CoelhoModel}=require("../model/CoelhoModel");
 const {Matriz}= require('../model/MatrizModel');
 const Database = require('../database');
 const {Reprodutor} = require('../model/ReprodutorModel');
-
+const upload = require('../uploads');
 
 module.exports.rotas = function(app) {
     const UsuarioRota = new Usuario();
@@ -218,10 +218,35 @@ app.post('/alterarSenha', async (req, res) => {
   });
 
   // Coelho
-  app.post('/coelho', async (req, res) => {
-    await CoelhosRota.insertCoelho(req.body);
-    res.sendStatus(201);
-  });
+ app.post(
+    '/coelho',
+    upload.single('foto_coelho'),
+    async (req, res) => {
+
+      try {
+
+        const dados = req.body;
+
+        if (req.file) {
+
+          dados.foto_coelho =
+            `uploads/${req.file.filename}`;
+        }
+
+        await CoelhosRota.insertCoelho(dados);
+
+        res.sendStatus(201);
+
+      } catch (erro) {
+
+        console.error(erro);
+
+        res.status(500).json({
+          erro: 'Erro ao cadastrar coelho'
+        });
+      }
+    }
+  );
 app.get('/coelhos', async (req, res) => {
   const tipo = req.query.tipo;
 
@@ -254,10 +279,38 @@ app.get('/coelhos', async (req, res) => {
     res.sendStatus(204);
   });
 
-  app.patch('/coelho/:id', async (req, res) => {
-    await CoelhosRota.updateCoelho(req.params.id, req.body);
-    res.sendStatus(200);
-  });
+app.patch(
+  '/coelho/:id',
+  upload.single('foto_coelho'),
+  async (req, res) => {
+
+    try {
+
+      const dados = req.body;
+
+      if (req.file) {
+
+        dados.foto_coelho =
+          `uploads/${req.file.filename}`;
+      }
+
+      await CoelhosRota.updateCoelho(
+        req.params.id,
+        dados
+      );
+
+      res.sendStatus(200);
+
+    } catch (erro) {
+
+      console.error(erro);
+
+      res.status(500).json({
+        erro: 'Erro ao atualizar coelho'
+      });
+    }
+  }
+);
 
  app.post('/matriz', async (req, res) => {
   console.log('POST /matriz - req.body:', req.body);
