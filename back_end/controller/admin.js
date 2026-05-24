@@ -284,6 +284,9 @@ app.patch(
   upload.single('foto_coelho'),
   async (req, res) => {
 
+    console.log("BODY:", req.body);
+    console.log("FILE:", req.file);
+
     try {
 
       const dados = req.body;
@@ -294,7 +297,12 @@ app.patch(
           `uploads/${req.file.filename}`;
       }
 
-      await CoelhosRota.updateCoelho(
+      console.log(
+        "FOTO SALVA:",
+        dados.foto_coelho
+      );
+
+      await CoelhoModel.updateCoelho(
         req.params.id,
         dados
       );
