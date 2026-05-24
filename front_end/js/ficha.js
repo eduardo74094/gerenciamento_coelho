@@ -7,25 +7,15 @@ if (!id) {
   window.history.back();
 }
 
-console.log(`🔍 Tentando carregar coelho ID: ${id}`);
-
 window.onload = async () => {
-  console.log("📄 Iniciando carregamento da ficha...");
-
-  aplicarRestricoesAluno();
-
   try {
     const res = await fetch(`${apiurl}/coelho/${id}`);
-    console.log(`📡 Status da resposta /coelho/${id}: ${res.status}`);
-
     if (!res.ok) throw new Error(`Erro ${res.status}`);
 
     const data = await res.json();
     const coelho = Array.isArray(data) ? data[0] : data;
 
-    console.log("✅ Coelho encontrado:", coelho.nome_coelho);
-
-    // Preencher campos
+    // Preencher campos (mantido igual)
     document.getElementById("numero_coelho").value = coelho.numero_coelho || "";
     document.getElementById("raca_coelho").value = coelho.raca_coelho || "";
     document.getElementById("data_nascimento_coelho").value = coelho.data_nascimento_coelho?.slice(0, 10) || "";
@@ -42,44 +32,27 @@ window.onload = async () => {
     document.getElementById("reprodutor_coelho").value = coelho.reprodutor_coelho || "";
     document.getElementById("observacoes_coelho").value = coelho.observacoes_coelho || "";
 
-    // ==================== FOTO ====================
+    // ==================== FOTO NOVA ====================
     const previewFoto = document.getElementById("previewFoto");
     
     if (coelho.foto_coelho) {
-      const fotoUrl = `${apiurl}/uploads/${coelho.foto_coelho}`;
-      console.log("🖼 Tentando carregar foto:", fotoUrl);
+      previewFoto.src = `${apiurl}/uploads/${coelho.foto_coelho}`;
       
-      previewFoto.src = fotoUrl;
-      
-      previewFoto.onerror = function() {
-        console.warn("Foto não encontrada, usando default");
+      previewFoto.onerror = () => {
         previewFoto.src = "/img/coelho-default.png";
-        previewFoto.onerror = null; // evita loop
+        previewFoto.onerror = null;
       };
     } else {
       previewFoto.src = "/img/coelho-default.png";
     }
 
     esconderbotaolaparo();
-    console.log("✅ Ficha carregada com sucesso!");
 
   } catch (err) {
-    console.error("❌ Erro ao carregar ficha:", err);
+    console.error(err);
     alert("Erro ao carregar dados do coelho.");
   }
 };
-
-function aplicarRestricoesAluno() {
-  try {
-    const raw = localStorage.getItem('usuario_atual');
-    if (!raw) return;
-    const user = JSON.parse(raw);
-    if (user.tipoususario?.toLowerCase() === 'aluno') {
-      const btnEditar = document.querySelector('.buttons button[onclick^="clicarbotao2"]');
-      if (btnEditar) btnEditar.style.display = 'none';
-    }
-  } catch (e) {}
-}
 
 function esconderbotaolaparo() {
   const tipo = document.getElementById("tipo_coelho")?.value || '';
