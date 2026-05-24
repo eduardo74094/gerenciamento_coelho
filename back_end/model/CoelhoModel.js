@@ -85,44 +85,47 @@ async updateCoelho(id, coelho) {
       matriz_coelho=$12,
       reprodutor_coelho=$13,
       situacao_coelho=$14,
-      transferido_coelho=$15
-    WHERE id_coelho=$16
+      transferido_coelho=$15,
+      foto_coelho=$16
+    WHERE id_coelho=$17
     RETURNING *;
     `;
 
     const res = await Database.query(sql, [
-  coelho.numero_coelho,
-  coelho.nome_coelho,
-  coelho.raca_coelho,
-  coelho.data_nascimento_coelho,
-  coelho.sexo_coelho,
-  coelho.observacoes_coelho,
-  coelho.peso_nascimento,
-  coelho.peso_atual,
-  coelho.tipo_coelho,
-  coelho.data_desmame,
-  coelho.peso_desmame,
-  coelho.matriz_coelho,
-  coelho.reprodutor_coelho,
-  (
-    coelho.situacao_coelho !== undefined
-      ? coelho.situacao_coelho
-      : (coelho.situacao || null)
-  ),
+      coelho.numero_coelho,
+      coelho.nome_coelho,
+      coelho.raca_coelho,
+      coelho.data_nascimento_coelho,
+      coelho.sexo_coelho,
+      coelho.observacoes_coelho,
+      coelho.peso_nascimento,
+      coelho.peso_atual,
+      coelho.tipo_coelho,
+      coelho.data_desmame,
+      coelho.peso_desmame,
+      coelho.matriz_coelho,
+      coelho.reprodutor_coelho,
 
-  coelho.transferido_coelho === "null" ||
-  coelho.transferido_coelho === "" ||
-  coelho.transferido_coelho === undefined
-    ? null
-    : Number(coelho.transferido_coelho),
+      (
+        coelho.situacao_coelho !== undefined
+          ? coelho.situacao_coelho
+          : (coelho.situacao || null)
+      ),
 
-  id
-]);
+      coelho.transferido_coelho === "null" ||
+      coelho.transferido_coelho === "" ||
+      coelho.transferido_coelho === undefined
+        ? null
+        : Number(coelho.transferido_coelho),
 
-    return res && res[0] ? res[0] : null;;
-  }
+      coelho.foto_coelho,
+
+      id
+    ]);
+
+    return res && res[0] ? res[0] : null;
 }
-
+}
 module.exports = {
   CoelhoModel,
 };
