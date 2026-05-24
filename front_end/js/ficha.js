@@ -60,4 +60,12 @@ window.onload = async () => {
 function esconderbotaolaparo() {
   const tipo = document.getElementById("tipo_coelho")?.value || '';
   const normalizado = tipo
-    .normalize('
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '')
+    .toLowerCase();
+
+  const botao = document.getElementById('botaocruzas');
+  if (botao && (normalizado === 'laparo' || normalizado === 'em crescimento')) {
+    botao.style.display = 'none';
+  }
+}
