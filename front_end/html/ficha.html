@@ -52,7 +52,8 @@
                class="foto-coelho" 
                src="/img/coelho-default.png" 
                alt="Foto do Coelho"
-               onclick="abrirFoto()">
+               onclick="abrirFoto()"
+               onerror="this.src='/img/coelho-default.png'; this.onerror=null;">
           <p class="foto-texto">Clique na imagem para ampliar</p>
         </div>
 
@@ -146,8 +147,6 @@
   <script src="/js/ficha.js"></script>
 
   <script>
-    console.log("🚀 Scripts da ficha carregados corretamente");
-
     function abrirFoto() {
       const modal = document.getElementById('modalFoto');
       const fotoGrande = document.getElementById('fotoGrande');
