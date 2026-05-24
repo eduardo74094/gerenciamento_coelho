@@ -7,6 +7,8 @@ if (!id) {
   window.history.back();
 }
 
+let fotoAtual = null; // 
+
 window.onload = async () => {
   try {
     const res = await fetch(`${apiurl}/coelho/${id}`);
@@ -15,7 +17,7 @@ window.onload = async () => {
     const data = await res.json();
     const coelho = Array.isArray(data) ? data[0] : data;
 
-  
+
     document.getElementById("numero_coelho").value = coelho.numero_coelho || "";
     document.getElementById("raca_coelho").value = coelho.raca_coelho || "";
     document.getElementById("data_nascimento_coelho").value = coelho.data_nascimento_coelho?.slice(0, 10) || "";
@@ -32,13 +34,8 @@ window.onload = async () => {
     document.getElementById("reprodutor_coelho").value = coelho.reprodutor_coelho || "";
     document.getElementById("observacoes_coelho").value = coelho.observacoes_coelho || "";
 
-   
     if (coelho.foto_coelho) {
-      const fotoUrl = coelho.foto_coelho.startsWith('http') 
-        ? coelho.foto_coelho 
-        : `${apiurl}/uploads/${coelho.foto_coelho}`;
-      
-      document.getElementById("previewFoto").src = fotoUrl;
+      document.getElementById("previewFoto").src = `${apiurl}/uploads/${coelho.foto_coelho}`;
     }
 
   } catch (err) {
@@ -47,8 +44,32 @@ window.onload = async () => {
   }
 };
 
+function previewFoto(event) {
+  const file = event.target.files[0];
+  if (file) {
+    fotoAtual = file; // guarda o arquivo para enviar depois
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('previewFoto').src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function abrirFoto() {
+  const modal = document.getElementById('modalFoto');
+  const fotoGrande = document.getElementById('fotoGrande');
+  fotoGrande.src = document.getElementById('previewFoto').src;
+  modal.style.display = "flex";
+}
+
+function fecharFoto() {
+  document.getElementById('modalFoto').style.display = "none";
+}
 
 async function salvaralteracao() {
+  if (!confirm("Deseja realmente salvar as alterações?")) return;
+
   const formData = new FormData();
 
   formData.append("numero_coelho", document.getElementById("numero_coelho").value);
@@ -67,67 +88,46 @@ async function salvaralteracao() {
   formData.append("reprodutor_coelho", document.getElementById("reprodutor_coelho").value);
   formData.append("observacoes_coelho", document.getElementById("observacoes_coelho").value);
 
- 
-  const fotoInput = document.getElementById("foto_coelho");
-  if (fotoInput.files.length > 0) {
-    formData.append("foto_coelho", fotoInput.files[0]);
+
+  if (fotoAtual) {
+    formData.append("foto_coelho", fotoAtual);
   }
 
   try {
     const res = await fetch(`${apiurl}/coelho/${id}`, {
-      method: 'PATCH',
+      method: "PUT",
       body: formData
     });
 
     if (res.ok) {
-      alert('Alterações salvas com sucesso!');
+      alert("Alterações salvas com sucesso!");
       window.location.href = `ficha.html?id=${id}`;
     } else {
-      alert('Erro ao salvar alterações.');
+      alert("Erro ao salvar alterações.");
     }
   } catch (err) {
     console.error(err);
-    alert('Falha ao conectar com o servidor.');
+    alert("Erro de conexão ao salvar.");
   }
 }
 
+
 async function deletarcoelho() {
-  if (!confirm("Deseja realmente excluir esta ficha?")) return;
+  if (!confirm("Tem certeza que deseja excluir este coelho? Esta ação não pode ser desfeita!")) {
+    return;
+  }
 
   try {
     const res = await fetch(`${apiurl}/coelho/${id}`, { method: "DELETE" });
+
     if (res.ok) {
-      alert("Coelho deletado com sucesso!");
-      window.location.href = 'index.html';
+      alert("Coelho excluído com sucesso!");
+      window.location.href = "index.html";
     } else {
-      alert("Erro ao deletar coelho.");
+      alert("Erro ao excluir coelho.");
     }
   } catch (err) {
-    alert("Erro ao conectar com o servidor.");
+    console.error(err);
+    alert("Erro de conexão.");
   }
-}
-
-
-function previewFoto(event) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      document.getElementById("previewFoto").src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
-}
-
-function abrirFoto() {
-  const modal = document.getElementById("modalFoto");
-  const fotoGrande = document.getElementById("fotoGrande");
-  const preview = document.getElementById("previewFoto");
-  
-  fotoGrande.src = preview.src;
-  modal.style.display = "flex";
-}
-
-function fecharFoto() {
-  document.getElementById("modalFoto").style.display = "none";
 }

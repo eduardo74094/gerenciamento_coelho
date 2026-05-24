@@ -5,7 +5,6 @@ const id = params.get("id");
 if (!id) {
   alert("Nenhum ID de coelho fornecido.");
   window.history.back();
-  throw new Error("ID não encontrado"); // para parar execução
 }
 
 window.onload = async () => {
@@ -18,6 +17,7 @@ window.onload = async () => {
     const data = await res.json();
     const coelho = Array.isArray(data) ? data[0] : data;
 
+   
     document.getElementById("numero_coelho").value = coelho.numero_coelho || "";
     document.getElementById("raca_coelho").value = coelho.raca_coelho || "";
     document.getElementById("data_nascimento_coelho").value = coelho.data_nascimento_coelho?.slice(0, 10) || "";
@@ -26,7 +26,6 @@ window.onload = async () => {
     document.getElementById("peso_desmame").value = coelho.peso_desmame || "";
     document.getElementById("peso_atual").value = coelho.peso_atual || "";
     document.getElementById("nome_coelho").value = coelho.nome_coelho || "";
-    
     document.getElementById("sexo_coelho").value = coelho.sexo_coelho || "";
     document.getElementById("tipo_coelho").value = coelho.tipo_coelho || "";
     document.getElementById("situacao_coelho").value = coelho.situacao_coelho || coelho.situacao || "ativo";
@@ -35,7 +34,7 @@ window.onload = async () => {
     document.getElementById("reprodutor_coelho").value = coelho.reprodutor_coelho || "";
     document.getElementById("observacoes_coelho").value = coelho.observacoes_coelho || "";
 
-  
+    
     const previewFoto = document.getElementById("previewFoto");
     if (coelho.foto_coelho && previewFoto) {
       previewFoto.src = `${apiurl}/uploads/${coelho.foto_coelho}`;
@@ -48,7 +47,6 @@ window.onload = async () => {
     alert("Erro ao carregar dados do coelho.");
   }
 };
-
 
 function aplicarRestricoesAluno() {
   try {
@@ -63,7 +61,6 @@ function aplicarRestricoesAluno() {
     console.error("Erro ao aplicar restrições de aluno:", e);
   }
 }
-
 
 function esconderbotaolaparo() {
   const tipo = document.getElementById("tipo_coelho")?.value || '';
