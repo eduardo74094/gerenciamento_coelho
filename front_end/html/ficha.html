@@ -51,29 +51,29 @@
 <body>
   <div class="container">
     <div class="form-box">
-      <div class="left">
-   <div class="foto-upload">
+    <div class="left">
 
-  <img
-    id="fotoPreview"
-    src="/img/coelho-default.png"
-    class="foto-coelho"
-    onclick="abrirFoto()"
-  >
+  <div class="foto-upload">
+    <label for="foto_coelho" style="cursor: pointer;">
+      <img id="previewFoto" 
+           class="foto-coelho" 
+           src="/img/coelho-default.png" 
+           alt="Foto do Coelho"
+           onclick="abrirFoto()">
+      <p class="foto-texto">Clique na imagem para trocar a foto</p>
+    </label>
+    <input type="file" 
+           id="foto_coelho" 
+           name="foto_coelho" 
+           accept="image/*" 
+           style="display: none;"
+           onchange="previewFoto(event)">
+  </div>
 
-  <input
-    type="file"
-    id="foto_coelho"
-     name="foto_coelho"
-    accept="image/*"
-    onchange="previewFoto(event)"
-  >
 
-</div>
-
-<div id="modalFoto" class="modal-foto" onclick="fecharFoto()">
-  <img id="fotoGrande">
-</div>
+  <div id="modalFoto" class="modal-foto" onclick="fecharFoto()">
+    <img id="fotoGrande">
+  </div>
         <label for="numero_coelho">codigo
           <input type="text" id="numero_coelho" name="numero_coelho" readonly>
         </label>
@@ -159,5 +159,30 @@
   </div>
 
   <script src="/js/ficha.js"></script>
+ 
+  <script>
+    function previewFoto(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('previewFoto').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function abrirFoto() {
+      const modal = document.getElementById('modalFoto');
+      const fotoGrande = document.getElementById('fotoGrande');
+      const preview = document.getElementById('previewFoto');
+      fotoGrande.src = preview.src;
+      modal.style.display = "flex";
+    }
+
+    function fecharFoto() {
+      document.getElementById('modalFoto').style.display = "none";
+    }
+  </script>
 </body>
 </html>
