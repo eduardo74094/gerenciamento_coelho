@@ -51,18 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-function aplicarRestricoesAluno(){
-  try{
-    const raw = localStorage.getItem('usuario_atual');
-    const user = raw ? JSON.parse(raw) : null;
-    if (user && (user.tipoususario || '').toLowerCase() === 'aluno'){
-      const addBtn = document.querySelector('.add-button button');
-      if (addBtn) addBtn.style.display = 'none';
-    }
-  }catch(e){}
-}
-
-function aplicarFiltros() {
+ function aplicarFiltros() {
    const tbody = document.getElementById('coelhoTableBody');
 
   const busca = (
@@ -87,12 +76,8 @@ function aplicarFiltros() {
 
     const buscaOk = (
       (coelho.nome_coelho || '').toLowerCase().includes(busca) ||
-
-      (coelho.numero_coelho != null &&
-       coelho.numero_coelho.toString().includes(busca)) ||
-
+      (coelho.numero_coelho != null && coelho.numero_coelho.toString().includes(busca)) ||
       (coelho.raca_coelho || '').toLowerCase().includes(busca) ||
-
       (coelho.tipo_coelho || '').toLowerCase().includes(busca)
     );
 
@@ -100,21 +85,34 @@ function aplicarFiltros() {
 
       const tr = document.createElement('tr');
 
+      // === FOTO ===
+      const fotoSrc = coelho.foto_coelho 
+        ? `/uploads/${coelho.foto_coelho}` 
+        : '/img/coelho-default.png';
+
       tr.innerHTML = `
+        <td>
+          <img src="${fotoSrc}" 
+               alt="Foto do coelho" 
+               width="55" 
+               height="55" 
+               style="object-fit: cover; border-radius: 8px; border: 2px solid #eee;">
+        </td>
         <td>${coelho.numero_coelho ?? '-'}</td>
         <td>${coelho.nome_coelho ?? '-'}</td>
         <td>${coelho.raca_coelho ?? '-'}</td>
-         <td>${coelho.tipo_coelho ?? '-'}</td>
+        <td>${coelho.tipo_coelho ?? '-'}</td>
         <td>${coelho.matriz_coelho || '-'}</td>
         <td>${coelho.reprodutor_coelho || '-'}</td>
       `;
 
       selecionarcoelho(tr, coelho.id_coelho);
-
       tbody.appendChild(tr);
     }
   });
 }
+
+
 
 
 function selecionarcoelho(tr, idCoelho) {
