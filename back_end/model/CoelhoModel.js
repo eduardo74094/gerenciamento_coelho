@@ -91,27 +91,33 @@ async updateCoelho(id, coelho) {
     `;
 
     const res = await Database.query(sql, [
-      coelho.numero_coelho,
-      coelho.nome_coelho,
-      coelho.raca_coelho,
-      coelho.data_nascimento_coelho,
-      coelho.sexo_coelho,
-      coelho.observacoes_coelho,
-      coelho.peso_nascimento,
-      coelho.peso_atual,
-      coelho.tipo_coelho,
-      coelho.data_desmame,
-      coelho.peso_desmame,
-      coelho.matriz_coelho,
-      coelho.reprodutor_coelho,
-      (
-        coelho.situacao_coelho !== undefined
-          ? coelho.situacao_coelho
-          : (coelho.situacao || null)
-      ),
-      coelho.transferido_coelho || null,
-      id
-    ]);
+  coelho.numero_coelho,
+  coelho.nome_coelho,
+  coelho.raca_coelho,
+  coelho.data_nascimento_coelho,
+  coelho.sexo_coelho,
+  coelho.observacoes_coelho,
+  coelho.peso_nascimento,
+  coelho.peso_atual,
+  coelho.tipo_coelho,
+  coelho.data_desmame,
+  coelho.peso_desmame,
+  coelho.matriz_coelho,
+  coelho.reprodutor_coelho,
+  (
+    coelho.situacao_coelho !== undefined
+      ? coelho.situacao_coelho
+      : (coelho.situacao || null)
+  ),
+
+  coelho.transferido_coelho === "null" ||
+  coelho.transferido_coelho === "" ||
+  coelho.transferido_coelho === undefined
+    ? null
+    : Number(coelho.transferido_coelho),
+
+  id
+]);
 
     return res && res[0] ? res[0] : null;;
   }
