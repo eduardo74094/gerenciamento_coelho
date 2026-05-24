@@ -17,14 +17,17 @@
     <div class="container">
       <div class="form-box">
         <div class="left">
-          <!-- Foto Preview -->
-          <div class="foto-upload">
-            <label for="foto_coelho" style="cursor: pointer;">
-              <img id="previewFoto" class="foto-coelho" src="/img/coelho-default.png" alt="Foto do Coelho">
-              <p style="margin-top: 8px; color: #555; text-align:center;">Clique para escolher foto</p>
-            </label>
-            <input type="file" id="foto_coelho" name="foto_coelho" accept="image/*" style="display: none;">
-          </div>
+    <div class="foto-upload">
+  <label for="foto_coelho" style="cursor: pointer;">
+    <img id="previewFoto" 
+         class="foto-coelho" 
+         src="/img/coelho-default.png" 
+         alt="Foto do Coelho">
+    <p class="foto-texto">Clique para escolher foto</p>
+  </label>
+  <input type="file" id="foto_coelho" name="foto_coelho" accept="image/*" style="display: none;">
+</div>
+           
 
           <label for="numero_coelho">Código
             <input type="text" id="numero_coelho" name="numero_coelho" required>
