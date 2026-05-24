@@ -72,11 +72,13 @@ async function salvaralteracao() {
     document.getElementById("data_desmame").value
   );
 
-  formData.append(
-    "peso_desmame",
-    document.getElementById("peso_desmame").value || null
-  );
+const pesoDesmame =
+  document.getElementById("peso_desmame").value;
 
+formData.append(
+  "peso_desmame",
+  pesoDesmame === "" ? "" : pesoDesmame
+);
   formData.append(
     "peso_atual",
     document.getElementById("peso_atual").value
@@ -117,11 +119,13 @@ async function salvaralteracao() {
     document.getElementById("situacao_coelho").value
   );
 
-  formData.append(
-    "transferido_coelho",
-    document.getElementById("transferido_coelho").value || null
-  );
+ const transferido =
+  document.getElementById("transferido_coelho").value;
 
+formData.append(
+  "transferido_coelho",
+  transferido === "" ? "" : transferido
+);
   const foto =
     document.getElementById("foto_coelho").files[0];
 
