@@ -7,7 +7,7 @@ if (!id) {
   window.history.back();
 }
 
-let fotoAtual = null; // para saber se mudou a foto
+let fotoAtual = null; // Armazena a nova foto selecionada
 
 window.onload = async () => {
   try {
@@ -17,7 +17,7 @@ window.onload = async () => {
     const data = await res.json();
     const coelho = Array.isArray(data) ? data[0] : data;
 
-    // Preencher campos
+    // Preencher os campos
     document.getElementById("numero_coelho").value = coelho.numero_coelho || "";
     document.getElementById("raca_coelho").value = coelho.raca_coelho || "";
     document.getElementById("data_nascimento_coelho").value = coelho.data_nascimento_coelho?.slice(0, 10) || "";
@@ -34,9 +34,10 @@ window.onload = async () => {
     document.getElementById("reprodutor_coelho").value = coelho.reprodutor_coelho || "";
     document.getElementById("observacoes_coelho").value = coelho.observacoes_coelho || "";
 
-    // Foto atual
-    if (coelho.foto_coelho) {
-      document.getElementById("previewFoto").src = `${apiurl}/uploads/${coelho.foto_coelho}`;
+    // Carregar foto atual
+    const previewFoto = document.getElementById("previewFoto");
+    if (coelho.foto_coelho && previewFoto) {
+      previewFoto.src = `${apiurl}/uploads/${coelho.foto_coelho}`;
     }
 
   } catch (err) {
@@ -45,11 +46,11 @@ window.onload = async () => {
   }
 };
 
-// ===================== PREVIEW DA FOTO =====================
+// ===================== PREVIEW DA NOVA FOTO =====================
 function previewFoto(event) {
   const file = event.target.files[0];
   if (file) {
-    fotoAtual = file; // guarda o arquivo para enviar depois
+    fotoAtual = file; // Guarda para enviar ao salvar
     const reader = new FileReader();
     reader.onload = function(e) {
       document.getElementById('previewFoto').src = e.target.result;
@@ -69,9 +70,9 @@ function fecharFoto() {
   document.getElementById('modalFoto').style.display = "none";
 }
 
-// ===================== SALVAR ALTERAÇÕES =====================
+// ===================== SALVAR =====================
 async function salvaralteracao() {
-  if (!confirm("Deseja realmente salvar as alterações?")) return;
+  if (!confirm("Deseja salvar as alterações?")) return;
 
   const formData = new FormData();
 
@@ -91,7 +92,7 @@ async function salvaralteracao() {
   formData.append("reprodutor_coelho", document.getElementById("reprodutor_coelho").value);
   formData.append("observacoes_coelho", document.getElementById("observacoes_coelho").value);
 
-  // Adiciona a foto apenas se o usuário trocou
+  // Envia foto apenas se o usuário selecionou uma nova
   if (fotoAtual) {
     formData.append("foto_coelho", fotoAtual);
   }
@@ -103,10 +104,10 @@ async function salvaralteracao() {
     });
 
     if (res.ok) {
-      alert("Alterações salvas com sucesso!");
+      alert("✅ Alterações salvas com sucesso!");
       window.location.href = `ficha.html?id=${id}`;
     } else {
-      alert("Erro ao salvar alterações.");
+      alert("Erro ao salvar as alterações.");
     }
   } catch (err) {
     console.error(err);
@@ -114,9 +115,9 @@ async function salvaralteracao() {
   }
 }
 
-// ===================== DELETAR COELHO =====================
+// ===================== DELETAR =====================
 async function deletarcoelho() {
-  if (!confirm("Tem certeza que deseja excluir este coelho? Esta ação não pode ser desfeita!")) {
+  if (!confirm("⚠️ Tem certeza que deseja excluir este coelho?")) {
     return;
   }
 
