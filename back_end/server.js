@@ -16,7 +16,7 @@ Database.conectar();
 
 app.use(express.json());
 
-app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+app.use("/uploads", express.static("uploads"));
 
 const frontendDir = path.join(__dirname, '..', 'front_end');
 
