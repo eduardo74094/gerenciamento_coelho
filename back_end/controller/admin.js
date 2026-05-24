@@ -294,7 +294,7 @@ app.patch(
       if (req.file) {
 
         dados.foto_coelho =
-          `uploads/${req.file.filename}`;
+           req.file.filename;
       }
 
       console.log(
