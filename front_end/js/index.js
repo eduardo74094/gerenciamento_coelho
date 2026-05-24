@@ -103,8 +103,8 @@ function aplicarFiltros() {
       tr.innerHTML = `
         <td>${coelho.numero_coelho ?? '-'}</td>
         <td>${coelho.nome_coelho ?? '-'}</td>
-        <td>${coelho.tipo_coelho ?? '-'}</td>
         <td>${coelho.raca_coelho ?? '-'}</td>
+         <td>${coelho.tipo_coelho ?? '-'}</td>
         <td>${coelho.situacao_coelho ?? '-'}</td>
         <td>${coelho.matriz_coelho || '-'}</td>
         <td>${coelho.reprodutor_coelho || '-'}</td>
