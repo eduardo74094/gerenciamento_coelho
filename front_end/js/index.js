@@ -85,6 +85,7 @@ function aplicarFiltros() {
         <td>${coelho.numero_coelho ?? '-'}</td>
         <td>${coelho.nome_coelho ?? '-'}</td>
         <td>${coelho.raca_coelho ?? '-'}</td>
+        <td>${coelho.status ?? '-'}</td>
         <td>${coelho.matriz_coelho || '-'}</td>
         <td>${coelho.reprodutor_coelho || '-'}</td>
       `;

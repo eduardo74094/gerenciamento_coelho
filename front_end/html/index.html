@@ -31,14 +31,7 @@
         <div class="search-box">
           <input type="text" id="searchInput" placeholder="Procurar..." />
         </div>
-        <div class="filter-box">
-          <select id="typeFilter">
-            <option value="Matriz">Matrizes</option>
-            <option value="Reprodutor">Reprodutores</option>
-            <option value="Láparo">Láparos</option>
-            <option value="em crescimento">em crescimento</option>
-          </select>
-        </div>
+      
         <div class="filter-box">
           <select id="statusFilter">
             
@@ -50,7 +43,7 @@
       </div>
       <div class="toolbar-right">
         <div class="add-button">
-          <button onclick="clicarbotao()">Adicionar</button>
+          <button onclick="clicarbotao()">Adicionar coelho</button>
         </div>
       </div>
     </div>
@@ -62,8 +55,9 @@
           <th>Número</th>
           <th>Nome</th>
           <th>Raça</th>
-          <th>Matriz</th>
-          <th>Reprodutor</th>
+          <th>status</th>
+          <th>Afiliação materna</th>
+          <th>Afiliação paterna</th>
         </tr>
       </thead>
       <tbody id="coelhoTableBody"></tbody>
