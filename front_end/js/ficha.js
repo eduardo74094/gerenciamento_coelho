@@ -7,7 +7,11 @@ if (!id) {
   window.history.back();
 }
 
+console.log("✅ FICHA.JS carregado corretamente - Modo VISUALIZAÇÃO");
+
 window.onload = async () => {
+  console.log("📄 Iniciando carregamento da ficha...");
+
   aplicarRestricoesAluno();
 
   try {
@@ -17,7 +21,9 @@ window.onload = async () => {
     const data = await res.json();
     const coelho = Array.isArray(data) ? data[0] : data;
 
-   
+    console.log("🐰 Coelho carregado:", coelho.nome_coelho);
+
+    // Preencher campos
     document.getElementById("numero_coelho").value = coelho.numero_coelho || "";
     document.getElementById("raca_coelho").value = coelho.raca_coelho || "";
     document.getElementById("data_nascimento_coelho").value = coelho.data_nascimento_coelho?.slice(0, 10) || "";
@@ -34,15 +40,16 @@ window.onload = async () => {
     document.getElementById("reprodutor_coelho").value = coelho.reprodutor_coelho || "";
     document.getElementById("observacoes_coelho").value = coelho.observacoes_coelho || "";
 
-    
     if (coelho.foto_coelho) {
       document.getElementById("previewFoto").src = `${apiurl}/uploads/${coelho.foto_coelho}`;
     }
 
     esconderbotaolaparo();
 
+    console.log("✅ Ficha carregada com sucesso!");
+
   } catch (err) {
-    console.error(err);
+    console.error("❌ Erro ao carregar ficha:", err);
     alert("Erro ao carregar dados do coelho.");
   }
 };
