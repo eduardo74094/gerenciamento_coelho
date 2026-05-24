@@ -12,7 +12,7 @@ window.onload = async () => {
 
   try {
     const res = await fetch(`${apiurl}/coelho/${id}`);
-    if (!res.ok) throw new Error("Erro ao buscar coelho: " + res.status);
+    if (!res.ok) throw new Error(`Erro ${res.status}`);
 
     const data = await res.json();
     const coelho = Array.isArray(data) ? data[0] : data;
@@ -35,9 +35,8 @@ window.onload = async () => {
     document.getElementById("observacoes_coelho").value = coelho.observacoes_coelho || "";
 
     
-    const previewFoto = document.getElementById("previewFoto");
-    if (coelho.foto_coelho && previewFoto) {
-      previewFoto.src = `${apiurl}/uploads/${coelho.foto_coelho}`;
+    if (coelho.foto_coelho) {
+      document.getElementById("previewFoto").src = `${apiurl}/uploads/${coelho.foto_coelho}`;
     }
 
     esconderbotaolaparo();
@@ -51,24 +50,18 @@ window.onload = async () => {
 function aplicarRestricoesAluno() {
   try {
     const raw = localStorage.getItem('usuario_atual');
-    const user = raw ? JSON.parse(raw) : null;
-
-    if (user && (user.tipoususario || '').toLowerCase() === 'aluno') {
+    if (!raw) return;
+    const user = JSON.parse(raw);
+    if (user.tipoususario?.toLowerCase() === 'aluno') {
       const btnEditar = document.querySelector('.buttons button[onclick^="clicarbotao2"]');
       if (btnEditar) btnEditar.style.display = 'none';
     }
-  } catch (e) {
-    console.error("Erro ao aplicar restrições de aluno:", e);
-  }
+  } catch (e) {}
 }
 
 function esconderbotaolaparo() {
   const tipo = document.getElementById("tipo_coelho")?.value || '';
-  const normalizado = tipo
-    .normalize('NFD')
-    .replace(/\p{Diacritic}/gu, '')
-    .toLowerCase();
-
+  const normalizado = tipo.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
   const botao = document.getElementById('botaocruzas');
   if (botao && (normalizado === 'laparo' || normalizado === 'em crescimento')) {
     botao.style.display = 'none';
