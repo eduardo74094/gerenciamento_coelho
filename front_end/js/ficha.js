@@ -5,17 +5,20 @@ const id = params.get("id");
 if (!id) {
   alert("Nenhum ID de coelho fornecido.");
   window.history.back();
+  throw new Error("ID não encontrado"); // para parar execução
 }
 
 window.onload = async () => {
+  aplicarRestricoesAluno();
+
   try {
     const res = await fetch(`${apiurl}/coelho/${id}`);
-    if (!res.ok) throw new Error(`Erro ${res.status}`);
+    if (!res.ok) throw new Error("Erro ao buscar coelho: " + res.status);
 
     const data = await res.json();
     const coelho = Array.isArray(data) ? data[0] : data;
 
-    // Preencher campos
+    // Preenchimento dos campos
     document.getElementById("numero_coelho").value = coelho.numero_coelho || "";
     document.getElementById("raca_coelho").value = coelho.raca_coelho || "";
     document.getElementById("data_nascimento_coelho").value = coelho.data_nascimento_coelho?.slice(0, 10) || "";
@@ -24,6 +27,7 @@ window.onload = async () => {
     document.getElementById("peso_desmame").value = coelho.peso_desmame || "";
     document.getElementById("peso_atual").value = coelho.peso_atual || "";
     document.getElementById("nome_coelho").value = coelho.nome_coelho || "";
+    
     document.getElementById("sexo_coelho").value = coelho.sexo_coelho || "";
     document.getElementById("tipo_coelho").value = coelho.tipo_coelho || "";
     document.getElementById("situacao_coelho").value = coelho.situacao_coelho || coelho.situacao || "ativo";
@@ -33,21 +37,12 @@ window.onload = async () => {
     document.getElementById("observacoes_coelho").value = coelho.observacoes_coelho || "";
 
     // ==================== FOTO ====================
-    const previewFoto = document.getElementById("fotoPreview");  // ← Alterado para fotoPreview
-    
-    if (coelho.foto_coelho) {
-      const fotoUrl = `${apiurl}/uploads/${coelho.foto_coelho}`;
-      previewFoto.src = fotoUrl;
-
-      previewFoto.onerror = function() {
-        console.warn("Foto não encontrada, usando padrão.");
-        previewFoto.src = "/img/coelho-default.png";
-        previewFoto.onerror = null; // evita loop
-      };
-    } else {
-      previewFoto.src = "/img/coelho-default.png";
+    const previewFoto = document.getElementById("previewFoto");
+    if (coelho.foto_coelho && previewFoto) {
+      previewFoto.src = `${apiurl}/uploads/${coelho.foto_coelho}`;
     }
 
+    // Esconde botão de cruzamentos se for Láparo
     esconderbotaolaparo();
 
   } catch (err) {
@@ -56,6 +51,22 @@ window.onload = async () => {
   }
 };
 
+// ===================== RESTRIÇÕES PARA ALUNO =====================
+function aplicarRestricoesAluno() {
+  try {
+    const raw = localStorage.getItem('usuario_atual');
+    const user = raw ? JSON.parse(raw) : null;
+
+    if (user && (user.tipoususario || '').toLowerCase() === 'aluno') {
+      const btnEditar = document.querySelector('.buttons button[onclick^="clicarbotao2"]');
+      if (btnEditar) btnEditar.style.display = 'none';
+    }
+  } catch (e) {
+    console.error("Erro ao aplicar restrições de aluno:", e);
+  }
+}
+
+// ===================== ESCONDE BOTÃO CRUZAMENTOS =====================
 function esconderbotaolaparo() {
   const tipo = document.getElementById("tipo_coelho")?.value || '';
   const normalizado = tipo
