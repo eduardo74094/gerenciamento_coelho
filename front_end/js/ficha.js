@@ -7,23 +7,31 @@ if (!id) {
   window.history.back();
 }
 
-console.log("✅ FICHA.JS carregado corretamente - Modo VISUALIZAÇÃO");
+console.log(`🔍 Tentando carregar coelho ID: ${id}`);
 
 window.onload = async () => {
   console.log("📄 Iniciando carregamento da ficha...");
 
-  aplicarRestricoesAluno();
-
   try {
     const res = await fetch(`${apiurl}/coelho/${id}`);
-    if (!res.ok) throw new Error(`Erro ${res.status}`);
+    
+    console.log(`📡 Status da resposta /coelho/${id}: ${res.status}`);
+
+    if (!res.ok) {
+      if (res.status === 404) {
+        alert(`❌ Coelho com ID ${id} não encontrado.`);
+      } else {
+        alert(`Erro ao buscar coelho: ${res.status}`);
+      }
+      throw new Error(`Erro ${res.status}`);
+    }
 
     const data = await res.json();
     const coelho = Array.isArray(data) ? data[0] : data;
 
-    console.log("🐰 Coelho carregado:", coelho.nome_coelho);
+    console.log("✅ Coelho encontrado:", coelho);
 
-    // Preencher campos
+    // Preencher os campos...
     document.getElementById("numero_coelho").value = coelho.numero_coelho || "";
     document.getElementById("raca_coelho").value = coelho.raca_coelho || "";
     document.getElementById("data_nascimento_coelho").value = coelho.data_nascimento_coelho?.slice(0, 10) || "";
@@ -41,36 +49,12 @@ window.onload = async () => {
     document.getElementById("observacoes_coelho").value = coelho.observacoes_coelho || "";
 
     if (coelho.foto_coelho) {
-      document.getElementById("previewFoto").src = `${apiurl}/uploads/${coelho.foto_coelho}`;
+      const fotoUrl = `${apiurl}/uploads/${coelho.foto_coelho}`;
+      console.log("🖼 Tentando carregar foto:", fotoUrl);
+      document.getElementById("previewFoto").src = fotoUrl;
     }
-
-    esconderbotaolaparo();
-
-    console.log("✅ Ficha carregada com sucesso!");
 
   } catch (err) {
-    console.error("❌ Erro ao carregar ficha:", err);
-    alert("Erro ao carregar dados do coelho.");
+    console.error("❌ Erro geral:", err);
   }
 };
-
-function aplicarRestricoesAluno() {
-  try {
-    const raw = localStorage.getItem('usuario_atual');
-    if (!raw) return;
-    const user = JSON.parse(raw);
-    if (user.tipoususario?.toLowerCase() === 'aluno') {
-      const btnEditar = document.querySelector('.buttons button[onclick^="clicarbotao2"]');
-      if (btnEditar) btnEditar.style.display = 'none';
-    }
-  } catch (e) {}
-}
-
-function esconderbotaolaparo() {
-  const tipo = document.getElementById("tipo_coelho")?.value || '';
-  const normalizado = tipo.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
-  const botao = document.getElementById('botaocruzas');
-  if (botao && (normalizado === 'laparo' || normalizado === 'em crescimento')) {
-    botao.style.display = 'none';
-  }
-}

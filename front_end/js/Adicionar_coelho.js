@@ -7,10 +7,9 @@ async function adicionarCoelho() {
     return;
   }
 
-  // Cria o FormData para enviar arquivo + dados
+ 
   const formData = new FormData();
 
-  // Adiciona todos os campos
   formData.append('numero_coelho', document.getElementById('numero_coelho').value);
   formData.append('raca_coelho', document.getElementById('raca_coelho').value);
   formData.append('data_nascimento_coelho', document.getElementById('data_nascimento_coelho').value);
@@ -28,7 +27,7 @@ async function adicionarCoelho() {
   formData.append('observacoes_coelho', document.getElementById('observacoes_coelho').value);
   formData.append('id_usuario', id_usuario);
 
-  // Adiciona a foto (se o usuário selecionou)
+ 
   const fotoInput = document.getElementById('foto_coelho');
   if (fotoInput && fotoInput.files.length > 0) {
     formData.append('foto_coelho', fotoInput.files[0]);
@@ -38,7 +37,7 @@ async function adicionarCoelho() {
     const res = await fetch('/coelho', {
       method: 'POST',
       body: formData
-      // NÃO coloque Content-Type aqui! O navegador configura automaticamente
+      
     });
 
     if (res.ok) {
