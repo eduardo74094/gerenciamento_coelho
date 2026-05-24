@@ -6,42 +6,55 @@ async function adicionarCoelho() {
     window.location.href = "login.html";
     return;
   }
-  const novoCoelho = {
-    numero_coelho: document.getElementById('numero_coelho').value,
-    raca_coelho: document.getElementById('raca_coelho').value,
-    data_nascimento_coelho: document.getElementById('data_nascimento_coelho').value,
-    peso_nascimento: document.getElementById('peso_nascimento').value,
-    peso_atual: document.getElementById('peso_atual').value,
-    data_desmame: document.getElementById('data_desmame').value,
-    peso_desmame: document.getElementById('peso_desmame').value,
-    nome_coelho: document.getElementById('nome_coelho').value,
-    sexo_coelho: document.getElementById('sexo_coelho').value,
-    tipo_coelho: document.getElementById('tipo_coelho').value,
-  situacao_coelho: document.getElementById('situacao_coelho').value,
-  transferido_coelho: document.getElementById('transferido_coelho').value || null,
-    matriz_coelho: document.getElementById('matriz_coelho').value,
-    reprodutor_coelho: document.getElementById('reprodutor_coelho').value,
-    observacoes_coelho: document.getElementById('observacoes_coelho').value,
-    id_usuario: parseInt(id_usuario)
 
-  };
+  // Cria o FormData para enviar arquivo + dados
+  const formData = new FormData();
+
+  // Adiciona todos os campos
+  formData.append('numero_coelho', document.getElementById('numero_coelho').value);
+  formData.append('raca_coelho', document.getElementById('raca_coelho').value);
+  formData.append('data_nascimento_coelho', document.getElementById('data_nascimento_coelho').value);
+  formData.append('peso_nascimento', document.getElementById('peso_nascimento').value);
+  formData.append('peso_atual', document.getElementById('peso_atual').value);
+  formData.append('data_desmame', document.getElementById('data_desmame').value);
+  formData.append('peso_desmame', document.getElementById('peso_desmame').value);
+  formData.append('nome_coelho', document.getElementById('nome_coelho').value);
+  formData.append('sexo_coelho', document.getElementById('sexo_coelho').value);
+  formData.append('tipo_coelho', document.getElementById('tipo_coelho').value);
+  formData.append('situacao_coelho', document.getElementById('situacao_coelho').value);
+  formData.append('transferido_coelho', document.getElementById('transferido_coelho').value || null);
+  formData.append('matriz_coelho', document.getElementById('matriz_coelho').value);
+  formData.append('reprodutor_coelho', document.getElementById('reprodutor_coelho').value);
+  formData.append('observacoes_coelho', document.getElementById('observacoes_coelho').value);
+  formData.append('id_usuario', id_usuario);
+
+  // Adiciona a foto (se o usuário selecionou)
+  const fotoInput = document.getElementById('foto_coelho');
+  if (fotoInput && fotoInput.files.length > 0) {
+    formData.append('foto_coelho', fotoInput.files[0]);
+  }
 
   try {
     const res = await fetch('/coelho', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(novoCoelho)
+      body: formData
+      // NÃO coloque Content-Type aqui! O navegador configura automaticamente
     });
 
     if (res.ok) {
       alert('Coelho adicionado com sucesso!');
       window.location.href = 'index.html';
     } else {
+      const erro = await res.text();
+      console.error(erro);
       alert('Erro ao adicionar coelho.');
     }
   } catch (err) {
+    console.error(err);
     alert('Erro ao conectar com o servidor.');
   }
 }
+  
+
+  
+
