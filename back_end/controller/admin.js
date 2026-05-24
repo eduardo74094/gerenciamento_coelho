@@ -229,8 +229,8 @@ app.post('/alterarSenha', async (req, res) => {
 
         if (req.file) {
 
-          dados.foto_coelho =
-            `uploads/${req.file.filename}`;
+          
+            dados.foto_coelho = req.file.filename;
         }
 
         await CoelhosRota.insertCoelho(dados);
