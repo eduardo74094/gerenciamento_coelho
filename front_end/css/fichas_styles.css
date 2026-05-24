@@ -96,7 +96,7 @@ body {
   padding: 20px;
   border-radius: 10px;
 
- width: 550px;
+ width: 520px;
   max-width: 95%;
 
   height: auto;
@@ -126,7 +126,7 @@ input {
   border-radius: 6px;
   background-color: #bee4ce;
 
-  width: 100px;
+  width: 160px;
   min-height: 24px;
 }
 
