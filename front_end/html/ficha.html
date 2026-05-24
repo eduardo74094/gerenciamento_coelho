@@ -14,19 +14,16 @@
     function clicarbotao2() {
       const params = new URLSearchParams(window.location.search);
       const id = params.get("id");
-
       if (!id) {
         alert("ID do coelho não encontrado.");
         return;
       }
-
       window.location.href = `editar.html?id=${id}`;
     }
 
     function clicarbotao3() {
       const params = new URLSearchParams(window.location.search);
       const id = params.get("id");
-
       if (!id) {
         alert("ID do coelho não encontrado.");
         return;
@@ -51,65 +48,63 @@
     <div class="form-box">
       <div class="left">
 
-       
+        <!-- FOTO - SOMENTE VISUALIZAÇÃO -->
         <div class="foto-upload">
           <img id="previewFoto" 
                class="foto-coelho" 
                src="/img/coelho-default.png" 
                alt="Foto do Coelho"
                onclick="abrirFoto()">
-
-         
+          <p class="foto-texto">Clique na imagem para ampliar</p>
         </div>
 
-        <!-- Modal para ampliar foto -->
         <div id="modalFoto" class="modal-foto" onclick="fecharFoto()">
           <img id="fotoGrande">
         </div>
 
         <label for="numero_coelho">Código
-          <input type="text" id="numero_coelho" name="numero_coelho" readonly>
+          <input type="text" id="numero_coelho" readonly>
         </label>
 
         <label for="raca_coelho">Raça
-          <input type="text" id="raca_coelho" name="raca_coelho" readonly>
+          <input type="text" id="raca_coelho" readonly>
         </label>
 
         <label for="data_nascimento_coelho">Data Nascimento
-          <input type="date" id="data_nascimento_coelho" name="data_nascimento_coelho" readonly>
+          <input type="date" id="data_nascimento_coelho" readonly>
         </label>
 
         <label for="peso_nascimento">Peso ao Nascer
-          <input type="text" id="peso_nascimento" name="peso_nascimento" readonly>
+          <input type="text" id="peso_nascimento" readonly>
         </label>
 
         <label for="data_desmame">Data Desmame
-          <input type="date" id="data_desmame" name="data_desmame" readonly>
+          <input type="date" id="data_desmame" readonly>
         </label>
 
         <label for="peso_desmame">Peso ao Desmame (kg)
-          <input type="text" step="0.01" id="peso_desmame" name="peso_desmame" readonly>
+          <input type="text" id="peso_desmame" readonly>
         </label>
 
         <label for="peso_atual">Peso Atual
-          <input type="text" id="peso_atual" name="peso_atual" readonly>
+          <input type="text" id="peso_atual" readonly>
         </label>
       </div>
 
       <div class="right">
         <label for="nome_coelho">Nome
-          <input type="text" id="nome_coelho" name="nome_coelho" readonly>
+          <input type="text" id="nome_coelho" readonly>
         </label>
 
         <label for="sexo_coelho">Sexo
-          <select id="sexo_coelho" name="sexo_coelho" readonly>
+          <select id="sexo_coelho" readonly>
             <option value="Macho">Macho</option>
             <option value="Fêmea">Fêmea</option>
           </select>
         </label>
 
         <label for="tipo_coelho">Tipo
-          <select id="tipo_coelho" name="tipo_coelho" readonly>
+          <select id="tipo_coelho" readonly>
             <option value="Matriz">Matriz</option>
             <option value="Reprodutor">Reprodutor</option>
             <option value="Láparo">Láparo</option>
@@ -118,7 +113,7 @@
         </label>
 
         <label for="situacao_coelho">Situação
-          <select id="situacao_coelho" name="situacao_coelho" readonly>
+          <select id="situacao_coelho" readonly>
             <option value="ativo">Ativo</option>
             <option value="inativo">Inativo</option>
             <option value="transferido">Transferido</option>
@@ -126,19 +121,19 @@
         </label>
 
         <label for="transferido_coelho">Transferido Para
-          <input type="number" id="transferido_coelho" name="transferido_coelho" readonly>
+          <input type="number" id="transferido_coelho" readonly>
         </label>
 
         <label for="matriz_coelho">Afiliação materna
-          <input type="text" id="matriz_coelho" name="matriz_coelho" readonly>
+          <input type="text" id="matriz_coelho" readonly>
         </label>
 
         <label for="reprodutor_coelho">Afiliação paterna
-          <input type="text" id="reprodutor_coelho" name="reprodutor_coelho" readonly>
+          <input type="text" id="reprodutor_coelho" readonly>
         </label>
 
         <label for="observacoes_coelho">Observações
-          <textarea id="observacoes_coelho" name="observacoes_coelho" readonly rows="4"></textarea>
+          <textarea id="observacoes_coelho" readonly rows="4"></textarea>
         </label>
 
         <div class="buttons">
