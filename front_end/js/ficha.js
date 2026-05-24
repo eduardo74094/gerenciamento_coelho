@@ -48,12 +48,22 @@ window.onload = async () => {
     document.getElementById("reprodutor_coelho").value = coelho.reprodutor_coelho || "";
     document.getElementById("observacoes_coelho").value = coelho.observacoes_coelho || "";
 
+   const previewFoto = document.getElementById("previewFoto");
+    
     if (coelho.foto_coelho) {
       const fotoUrl = `${apiurl}/uploads/${coelho.foto_coelho}`;
       console.log("🖼 Tentando carregar foto:", fotoUrl);
-      document.getElementById("previewFoto").src = fotoUrl;
-    }
+      
 
+      previewFoto.src = fotoUrl;
+      
+      previewFoto.onerror = function() {
+        console.warn("Foto não encontrada, usando default");
+        previewFoto.src = "/img/coelho-default.png";
+      };
+    } else {
+      previewFoto.src = "/img/coelho-default.png";
+    }
   } catch (err) {
     console.error("❌ Erro geral:", err);
   }
