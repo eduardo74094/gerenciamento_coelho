@@ -7,7 +7,7 @@ if (!id) {
   window.history.back();
 }
 
-let fotoAtual = null; // 
+let fotoAtual = null; // para saber se mudou a foto
 
 window.onload = async () => {
   try {
@@ -17,7 +17,7 @@ window.onload = async () => {
     const data = await res.json();
     const coelho = Array.isArray(data) ? data[0] : data;
 
-
+    // Preencher campos
     document.getElementById("numero_coelho").value = coelho.numero_coelho || "";
     document.getElementById("raca_coelho").value = coelho.raca_coelho || "";
     document.getElementById("data_nascimento_coelho").value = coelho.data_nascimento_coelho?.slice(0, 10) || "";
@@ -34,6 +34,7 @@ window.onload = async () => {
     document.getElementById("reprodutor_coelho").value = coelho.reprodutor_coelho || "";
     document.getElementById("observacoes_coelho").value = coelho.observacoes_coelho || "";
 
+    // Foto atual
     if (coelho.foto_coelho) {
       document.getElementById("previewFoto").src = `${apiurl}/uploads/${coelho.foto_coelho}`;
     }
@@ -44,6 +45,7 @@ window.onload = async () => {
   }
 };
 
+// ===================== PREVIEW DA FOTO =====================
 function previewFoto(event) {
   const file = event.target.files[0];
   if (file) {
@@ -67,6 +69,7 @@ function fecharFoto() {
   document.getElementById('modalFoto').style.display = "none";
 }
 
+// ===================== SALVAR ALTERAÇÕES =====================
 async function salvaralteracao() {
   if (!confirm("Deseja realmente salvar as alterações?")) return;
 
@@ -88,7 +91,7 @@ async function salvaralteracao() {
   formData.append("reprodutor_coelho", document.getElementById("reprodutor_coelho").value);
   formData.append("observacoes_coelho", document.getElementById("observacoes_coelho").value);
 
-
+  // Adiciona a foto apenas se o usuário trocou
   if (fotoAtual) {
     formData.append("foto_coelho", fotoAtual);
   }
@@ -111,7 +114,7 @@ async function salvaralteracao() {
   }
 }
 
-
+// ===================== DELETAR COELHO =====================
 async function deletarcoelho() {
   if (!confirm("Tem certeza que deseja excluir este coelho? Esta ação não pode ser desfeita!")) {
     return;
