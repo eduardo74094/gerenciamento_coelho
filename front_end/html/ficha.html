@@ -54,17 +54,22 @@
     <div class="form-box">
     <div class="left">
 
- <<div class="foto-upload" style="text-align: center; margin-bottom: 25px;">
-  <label for="foto_coelho" style="cursor: pointer; display: inline-block;">
-    <img 
-      id="previewFoto" 
-      class="foto-coelho" 
-      src="/img/coelho-default.png" 
-      alt="Foto do Coelho"
-      onclick="document.getElementById('foto_coelho').click();"
-    >
-    
-  </label>
+  <div class="foto-upload">
+    <label for="foto_coelho" style="cursor: pointer;">
+      <img id="previewFoto" 
+           class="foto-coelho" 
+           src="/img/coelho-default.png" 
+           alt="Foto do Coelho"
+           onclick="abrirFoto()">
+      <p class="foto-texto">Clique na imagem para trocar a foto</p>
+    </label>
+    <input type="file" 
+           id="foto_coelho" 
+           name="foto_coelho" 
+           accept="image/*" 
+           style="display: none;"
+           onchange="previewFoto(event)">
+  </div>
 
 
  
