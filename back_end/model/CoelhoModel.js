@@ -2,7 +2,6 @@ const Database = require('../database');
 
 class CoelhoModel {
 
-  // Funções auxiliares de conversão (usadas em todas as operações)
   toInt(value) {
     if (value == null || value === "" || value === "null" || value === "undefined") {
       return null;
@@ -54,7 +53,7 @@ class CoelhoModel {
       this.toInt(coelho.reprodutor_coelho),
       this.toInt(coelho.id_usuario),
       coelho.situacao_coelho || 'ativo',
-      this.toInt(coelho.transferido_coelho),   // ← principal problema
+      this.toInt(coelho.transferido_coelho),   
       this.toNull(coelho.foto_coelho)
     ];
 

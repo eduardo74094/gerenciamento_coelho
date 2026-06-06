@@ -228,6 +228,28 @@ button:hover {
 .modal-close:hover {
   color: #ff4444;
 }
+.foto-coelho {
+  width: 230px;          
+  height: 230px;
+  object-fit: cover;      
+  object-position: center;
+  border-radius: 50%;
+  border: 6px solid #4CAF50;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  background-color: #f0f0f0; 
+}
+
+.foto-coelho:hover {
+  transform: scale(1.05);
+}
+
+.foto-texto {
+  margin-top: 12px;
+  color: #555;
+  font-size: 15px;
+  font-weight: 500;
+}
 /* Responsividade para Mobile */
 @media (max-width: 768px) {
   body {
