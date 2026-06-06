@@ -2,31 +2,50 @@ const Database = require('../database');
 
 class CoelhoModel {
 
-  async insertCoelho(coelho) {
-    const sql = `
-      INSERT INTO coelho (
-        numero_coelho, nome_coelho, raca_coelho, data_nascimento_coelho,
-        sexo_coelho, observacoes_coelho, peso_nascimento, peso_atual,
-        peso_desmame, tipo_coelho, data_desmame, matriz_coelho,
-        reprodutor_coelho, id_usuario, situacao_coelho, transferido_coelho,
-        foto_coelho
-      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)
-      RETURNING *;
-    `;
+ async insertCoelho(coelho) {
+  
+  const toInt = (value) => {
+    if (value === null || value === undefined || value === "" || value === "null") {
+      return null;
+    }
+    const num = parseInt(value, 10);
+    return isNaN(num) ? null : num;
+  };
 
-    const res = await Database.query(sql, [
-      coelho.numero_coelho, coelho.nome_coelho, coelho.raca_coelho,
-      coelho.data_nascimento_coelho, coelho.sexo_coelho, coelho.observacoes_coelho,
-      coelho.peso_nascimento, coelho.peso_atual, coelho.peso_desmame,
-      coelho.tipo_coelho, coelho.data_desmame, coelho.matriz_coelho,
-      coelho.reprodutor_coelho, coelho.id_usuario, 
-      coelho.situacao_coelho || 'ativo',
-      coelho.transferido_coelho || null,
-      coelho.foto_coelho || null
-    ]);
+  const sql = `
+    INSERT INTO coelho (
+      numero_coelho, nome_coelho, raca_coelho, data_nascimento_coelho,
+      sexo_coelho, observacoes_coelho, peso_nascimento, peso_atual,
+      peso_desmame, tipo_coelho, data_desmame, matriz_coelho,
+      reprodutor_coelho, id_usuario, situacao_coelho, transferido_coelho,
+      foto_coelho
+    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)
+    RETURNING *;
+  `;
 
-    return res && res[0] ? res[0] : null;
-  }
+  const valores = [
+    toInt(coelho.numero_coelho),
+    coelho.nome_coelho,
+    coelho.raca_coelho,
+    coelho.data_nascimento_coelho,
+    coelho.sexo_coelho,
+    coelho.observacoes_coelho || null,
+    toInt(coelho.peso_nascimento),
+    toInt(coelho.peso_atual),
+    toInt(coelho.peso_desmame),
+    coelho.tipo_coelho,                    
+    coelho.data_desmame,
+    toInt(coelho.matriz_coelho),
+    toInt(coelho.reprodutor_coelho),
+    toInt(coelho.id_usuario),            
+    coelho.situacao_coelho || 'ativo',
+    coelho.transferido_coelho || null,
+    coelho.foto_coelho || null
+  ];
+
+  const res = await Database.query(sql, valores);
+  return res && res[0] ? res[0] : null;
+}
 
   async selectCoelhos() {
     const res = await Database.query("SELECT * FROM coelho ORDER BY nome_coelho ASC");
