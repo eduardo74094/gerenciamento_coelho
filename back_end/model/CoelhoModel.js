@@ -97,57 +97,56 @@ class CoelhoModel {
     }
   }
 
-  async updateCoelho(id, coelho) {
-    const sql = `
-      UPDATE coelho SET
-        numero_coelho = $1,
-        nome_coelho = $2,
-        raca_coelho = $3,
-        data_nascimento_coelho = $4,
-        sexo_coelho = $5,
-        observacoes_coelho = $6,
-        peso_nascimento = $7,
-        peso_atual = $8,
-        peso_desmame = $9,
-        tipo_coelho = $10,
-        data_desmame = $11,
-        matriz_coelho = $12,
-        reprodutor_coelho = $13,
-        situacao_coelho = $14,
-        transferido_coelho = $15,
-        foto_coelho = $16
-      WHERE id_coelho = $17
-      RETURNING *;
-    `;
+ async updateCoelho(id, coelho) {
+  const sql = `
+    UPDATE coelho SET
+      numero_coelho = $1,
+      nome_coelho = $2,
+      raca_coelho = $3,
+      data_nascimento_coelho = $4,
+      sexo_coelho = $5,
+      observacoes_coelho = $6,
+      peso_nascimento = $7,
+      peso_atual = $8,
+      peso_desmame = $9,
+      tipo_coelho = $10,
+      data_desmame = $11,
+      matriz_coelho = $12,
+      reprodutor_coelho = $13,
+      situacao_coelho = $14,
+      transferido_coelho = $15,
+      foto_coelho = $16
+    WHERE id_coelho = $17
+    RETURNING *;
+  `;
 
-    const valores = [
-      this.toInt(coelho.numero_coelho),
-      this.toNull(coelho.nome_coelho),
-      this.toNull(coelho.raca_coelho),
-      coelho.data_nascimento_coelho,
-      this.toNull(coelho.sexo_coelho),
-      this.toNull(coelho.observacoes_coelho),
-      this.toDouble(coelho.peso_nascimento),
-      this.toDouble(coelho.peso_atual),
-      this.toDouble(coelho.peso_desmame),
-      this.toNull(coelho.tipo_coelho),
-      coelho.data_desmame,
-      this.toInt(coelho.matriz_coelho),
-      this.toInt(coelho.reprodutor_coelho),
-      coelho.situacao_coelho || 'ativo',
-      this.toInt(coelho.transferido_coelho),
-      this.toNull(coelho.foto_coelho),
-      this.toInt(id)                    // ID do WHERE
-    ];
+  const valores = [
+    this.toNull(coelho.numero_coelho),   
+    this.toNull(coelho.nome_coelho),
+    this.toNull(coelho.raca_coelho),
+    coelho.data_nascimento_coelho,
+    this.toNull(coelho.sexo_coelho),
+    this.toNull(coelho.observacoes_coelho),
+    this.toDouble(coelho.peso_nascimento),
+    this.toDouble(coelho.peso_atual),
+    this.toDouble(coelho.peso_desmame),
+    this.toNull(coelho.tipo_coelho),
+    coelho.data_desmame,
+    this.toNull(coelho.matriz_coelho),     // mantido como texto
+    this.toNull(coelho.reprodutor_coelho), // mantido como texto
+    this.toNull(coelho.situacao_coelho) || 'ativo',
+    this.toInt(coelho.transferido_coelho),
+    this.toNull(coelho.foto_coelho),
+    this.toInt(id)
+  ];
 
-    try {
-      const res = await Database.query(sql, valores);
-      return res && res[0] ? res[0] : null;
-    } catch (error) {
-      console.error("❌ Erro ao atualizar coelho:", error);
-      throw error;
-    }
+  try {
+    const res = await Database.query(sql, valores);
+    return res && res[0] ? res[0] : null;
+  } catch (error) {
+    console.error("❌ Erro ao atualizar coelho:", error);
+    throw error;
   }
 }
-
+}
 module.exports = { CoelhoModel };
