@@ -13,26 +13,18 @@
   </script>
 </head>
 <body>
-<div class="foto-upload" style="text-align: center; margin-bottom: 25px;">
-  <label for="foto_coelho" style="cursor: pointer; display: inline-block;">
-    <img 
-      id="previewFoto" 
-      class="foto-coelho" 
-      src="/img/coelho-default.png" 
-      alt="Foto do Coelho"
-      onclick="document.getElementById('foto_coelho').click();"
-    >
-    <p class="foto-texto">foto coelho</p>
+  <form id="formCoelho" enctype="multipart/form-data">
+    <div class="container">
+      <div class="form-box">
+        <div class="left">
+    <div class="foto-upload">
+  <label for="foto_coelho" style="cursor: pointer;">
+    <img id="previewFoto" 
+         class="foto-coelho" 
+         src="/img/coelho-default.png" 
+         alt="Foto do Coelho">
+    <p class="foto-texto">   foto coelho</p>
   </label>
-  
-  <input 
-    type="file" 
-    id="foto_coelho" 
-    name="foto_coelho" 
-    accept="image/*" 
-    style="display: none;"
-  >
-</div>
   <input type="file" id="foto_coelho" name="foto_coelho" accept="image/*" style="display: none;">
 </div>
            
@@ -95,7 +87,7 @@
             </select>
           </label>
 
-          <label for="transferido_coelho">Transferido Para (ID)(se foi transferido)
+          <label for="transferido_coelho">Transferido Para (ID)(se foi trasferido)
             <input type="number" id="transferido_coelho" name="transferido_coelho">
           </label>
 
