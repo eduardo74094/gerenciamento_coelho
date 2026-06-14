@@ -7,6 +7,7 @@ if (!id) {
   window.history.back();
 }
 
+// ====================== PESO ======================
 function normalizarPeso(valor) {
   return valor.replace(',', '.');
 }
@@ -40,6 +41,8 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('peso_atual').addEventListener('keydown', formatarPesoInput);
   document.getElementById('peso_desmame').addEventListener('keydown', formatarPesoInput);
 });
+
+// ====================== CARREGAR DADOS ======================
 window.onload = async () => {
   try {
     const res = await fetch(`${apiurl}/coelho/${id}`);
@@ -48,12 +51,18 @@ window.onload = async () => {
     const data = await res.json();
     const coelho = Array.isArray(data) ? data[0] : data;
 
-    // Preenche os campos
     document.getElementById("numero_coelho").value = coelho.numero_coelho || "";
     document.getElementById("raca_coelho").value = coelho.raca_coelho || "";
-    document.getElementById("data_nascimento_coelho").value = coelho.data_nascimento_coelho?.slice(0, 10) || "";
+
+    if (coelho.data_nascimento_coelho) {
+      document.getElementById("data_nascimento_coelho").value = new Date(coelho.data_nascimento_coelho).toISOString().slice(0, 10);
+    }
+
+    if (coelho.data_desmame) {
+      document.getElementById("data_desmame").value = new Date(coelho.data_desmame).toISOString().slice(0, 10);
+    }
+
     document.getElementById("peso_nascimento").value = coelho.peso_nascimento || "";
-    document.getElementById("data_desmame").value = coelho.data_desmame?.slice(0, 10) || "";
     document.getElementById("peso_desmame").value = coelho.peso_desmame || "";
     document.getElementById("peso_atual").value = coelho.peso_atual || "";
     document.getElementById("nome_coelho").value = coelho.nome_coelho || "";
@@ -65,12 +74,10 @@ window.onload = async () => {
     document.getElementById("reprodutor_coelho").value = coelho.reprodutor_coelho || "";
     document.getElementById("observacoes_coelho").value = coelho.observacoes_coelho || "";
 
-    // Carrega foto existente
     if (coelho.foto_coelho) {
-      const fotoUrl = coelho.foto_coelho.startsWith('http') 
-        ? coelho.foto_coelho 
+      const fotoUrl = coelho.foto_coelho.startsWith('http')
+        ? coelho.foto_coelho
         : `${apiurl}/uploads/${coelho.foto_coelho}`;
-      
       document.getElementById("previewFoto").src = fotoUrl;
     }
 
@@ -82,16 +89,21 @@ window.onload = async () => {
 
 // ====================== SALVAR ======================
 async function salvaralteracao() {
-  const formData = new FormData();
+  const dataNasc = document.getElementById("data_nascimento_coelho").value;
+  if (!dataNasc) {
+    alert("Data de nascimento é obrigatória.");
+    return;
+  }
 
+  const formData = new FormData();
   formData.append("numero_coelho", document.getElementById("numero_coelho").value);
-  formData.append("raca_coelho", document.getElementById("raca_coelho").value);
- formData.append("peso_nascimento", normalizarPeso(document.getElementById("peso_nascimento").value));
-  formData.append("peso_nascimento", document.getElementById("peso_nascimento").value);
-  formData.append("data_desmame", document.getElementById("data_desmame").value);
- formData.append("peso_desmame", normalizarPeso(document.getElementById("peso_desmame").value));
-formData.append("peso_atual", normalizarPeso(document.getElementById("peso_atual").value));
   formData.append("nome_coelho", document.getElementById("nome_coelho").value);
+  formData.append("raca_coelho", document.getElementById("raca_coelho").value);
+  formData.append("data_nascimento_coelho", dataNasc);
+  formData.append("data_desmame", document.getElementById("data_desmame").value);
+  formData.append("peso_nascimento", normalizarPeso(document.getElementById("peso_nascimento").value));
+  formData.append("peso_desmame", normalizarPeso(document.getElementById("peso_desmame").value));
+  formData.append("peso_atual", normalizarPeso(document.getElementById("peso_atual").value));
   formData.append("sexo_coelho", document.getElementById("sexo_coelho").value);
   formData.append("tipo_coelho", document.getElementById("tipo_coelho").value);
   formData.append("situacao_coelho", document.getElementById("situacao_coelho").value);
@@ -100,7 +112,6 @@ formData.append("peso_atual", normalizarPeso(document.getElementById("peso_atual
   formData.append("reprodutor_coelho", document.getElementById("reprodutor_coelho").value);
   formData.append("observacoes_coelho", document.getElementById("observacoes_coelho").value);
 
-  // Adiciona nova foto se selecionada
   const fotoInput = document.getElementById("foto_coelho");
   if (fotoInput.files.length > 0) {
     formData.append("foto_coelho", fotoInput.files[0]);
@@ -157,7 +168,6 @@ function abrirFoto() {
   const modal = document.getElementById("modalFoto");
   const fotoGrande = document.getElementById("fotoGrande");
   const preview = document.getElementById("previewFoto");
-  
   fotoGrande.src = preview.src;
   modal.style.display = "flex";
 }
