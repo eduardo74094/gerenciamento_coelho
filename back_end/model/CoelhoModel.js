@@ -49,11 +49,11 @@ class CoelhoModel {
       this.toDouble(coelho.peso_desmame),
       this.toNull(coelho.tipo_coelho),
       coelho.data_desmame,
-      this.toInt(coelho.matriz_coelho),
-      this.toInt(coelho.reprodutor_coelho),
+      this.toNull(coelho.matriz_coelho),
+      this.toNull(coelho.reprodutor_coelho),
       this.toInt(coelho.id_usuario),
       coelho.situacao_coelho || 'ativo',
-      this.toInt(coelho.transferido_coelho),   
+      this.toNull(coelho.transferido_coelho),   
       this.toNull(coelho.foto_coelho)
     ];
 

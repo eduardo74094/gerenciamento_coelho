@@ -1,3 +1,17 @@
+function normalizarPeso(valor) {
+  return valor.replace(',', '.');
+}
+
+document.getElementById('peso_nascimento').addEventListener('input', function() {
+  this.value = this.value.replace('.', ',');
+});
+document.getElementById('peso_atual').addEventListener('input', function() {
+  this.value = this.value.replace('.', ',');
+});
+document.getElementById('peso_desmame').addEventListener('input', function() {
+  this.value = this.value.replace('.', ',');
+});
+
 async function adicionarCoelho() {
   const id_usuario = localStorage.getItem("id_usuario");
   if (!id_usuario) {
@@ -7,17 +21,15 @@ async function adicionarCoelho() {
 
   const codigo = document.getElementById('numero_coelho').value.trim().toUpperCase();
 
-
-
   const formData = new FormData();
   formData.append('numero_coelho', codigo);
   formData.append('nome_coelho', document.getElementById('nome_coelho').value);
   formData.append('raca_coelho', document.getElementById('raca_coelho').value);
   formData.append('data_nascimento_coelho', document.getElementById('data_nascimento_coelho').value);
-  formData.append('peso_nascimento', document.getElementById('peso_nascimento').value);
-  formData.append('peso_atual', document.getElementById('peso_atual').value);
+  formData.append('peso_nascimento', normalizarPeso(document.getElementById('peso_nascimento').value));
+  formData.append('peso_atual', normalizarPeso(document.getElementById('peso_atual').value));
+  formData.append('peso_desmame', normalizarPeso(document.getElementById('peso_desmame').value));
   formData.append('data_desmame', document.getElementById('data_desmame').value);
-  formData.append('peso_desmame', document.getElementById('peso_desmame').value);
   formData.append('sexo_coelho', document.getElementById('sexo_coelho').value);
   formData.append('tipo_coelho', document.getElementById('tipo_coelho').value);
   formData.append('situacao_coelho', document.getElementById('situacao_coelho').value);
@@ -26,7 +38,6 @@ async function adicionarCoelho() {
   formData.append('observacoes_coelho', document.getElementById('observacoes_coelho').value);
   formData.append('id_usuario', id_usuario);
 
-  // Foto
   const foto = document.getElementById('foto_coelho');
   if (foto.files.length > 0) {
     formData.append('foto_coelho', foto.files[0]);
