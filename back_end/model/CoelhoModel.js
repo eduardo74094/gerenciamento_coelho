@@ -38,7 +38,7 @@ class CoelhoModel {
     `;
 
     const valores = [
-      this.toInt(coelho.numero_coelho),
+      this.toNull(coelho.numero_coelho),
       this.toNull(coelho.nome_coelho),
       this.toNull(coelho.raca_coelho),
       coelho.data_nascimento_coelho,

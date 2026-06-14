@@ -7,10 +7,7 @@ async function adicionarCoelho() {
 
   const codigo = document.getElementById('numero_coelho').value.trim().toUpperCase();
 
-  if (!codigo.startsWith("BLG-")) {
-    alert("Código deve começar com BLG-");
-    return;
-  }
+
 
   const formData = new FormData();
   formData.append('numero_coelho', codigo);
