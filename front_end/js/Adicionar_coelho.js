@@ -1,30 +1,32 @@
-function normalizarPeso(valor) {
-  return valor.replace(',', '.');
-}
+function formatarPesoInput(e) {
+  const input = e.target;
+  const key = e.key;
 
-function formatarPesoInput(input) {
-  let valor = input.value;
-  // Remove tudo que não for número, vírgula ou ponto
-  valor = valor.replace(/[^0-9.,]/g, '');
-  // Garante só um separador decimal
-  const partes = valor.split(/[.,]/);
-  if (partes.length > 2) {
-    valor = partes[0] + ',' + partes.slice(1).join('');
-  } else if (valor.includes('.')) {
-    valor = valor.replace('.', ',');
+  if (['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight'].includes(key)) return;
+
+  if (!/[0-9.,]/.test(key)) {
+    e.preventDefault();
+    return;
   }
-  input.value = valor;
+
+
+  if ((key === '.' || key === ',') && /[.,]/.test(input.value)) {
+    e.preventDefault();
+    return;
+  }
+
+
+  if (key === '.') {
+    e.preventDefault();
+    const pos = input.selectionStart;
+    input.value = input.value.slice(0, pos) + ',' + input.value.slice(pos);
+    input.setSelectionRange(pos + 1, pos + 1);
+  }
 }
 
-document.getElementById('peso_nascimento').addEventListener('input', function() {
-  formatarPesoInput(this);
-});
-document.getElementById('peso_atual').addEventListener('input', function() {
-  formatarPesoInput(this);
-});
-document.getElementById('peso_desmame').addEventListener('input', function() {
-  formatarPesoInput(this);
-});
+document.getElementById('peso_nascimento').addEventListener('keydown', formatarPesoInput);
+document.getElementById('peso_atual').addEventListener('keydown', formatarPesoInput);
+document.getElementById('peso_desmame').addEventListener('keydown', formatarPesoInput);
 
 async function adicionarCoelho() {
   const id_usuario = localStorage.getItem("id_usuario");
