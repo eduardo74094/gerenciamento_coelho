@@ -1,3 +1,7 @@
+function normalizarPeso(valor) {
+  return valor.replace(',', '.');
+}
+
 function formatarPesoInput(e) {
   const input = e.target;
   const key = e.key;
@@ -9,12 +13,10 @@ function formatarPesoInput(e) {
     return;
   }
 
-
   if ((key === '.' || key === ',') && /[.,]/.test(input.value)) {
     e.preventDefault();
     return;
   }
-
 
   if (key === '.') {
     e.preventDefault();
