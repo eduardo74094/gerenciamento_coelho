@@ -2,14 +2,28 @@ function normalizarPeso(valor) {
   return valor.replace(',', '.');
 }
 
+function formatarPesoInput(input) {
+  let valor = input.value;
+  // Remove tudo que não for número, vírgula ou ponto
+  valor = valor.replace(/[^0-9.,]/g, '');
+  // Garante só um separador decimal
+  const partes = valor.split(/[.,]/);
+  if (partes.length > 2) {
+    valor = partes[0] + ',' + partes.slice(1).join('');
+  } else if (valor.includes('.')) {
+    valor = valor.replace('.', ',');
+  }
+  input.value = valor;
+}
+
 document.getElementById('peso_nascimento').addEventListener('input', function() {
-  this.value = this.value.replace('.', ',');
+  formatarPesoInput(this);
 });
 document.getElementById('peso_atual').addEventListener('input', function() {
-  this.value = this.value.replace('.', ',');
+  formatarPesoInput(this);
 });
 document.getElementById('peso_desmame').addEventListener('input', function() {
-  this.value = this.value.replace('.', ',');
+  formatarPesoInput(this);
 });
 
 async function adicionarCoelho() {
