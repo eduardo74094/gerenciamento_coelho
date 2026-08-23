@@ -31,8 +31,8 @@ async function salvar() {
     numero_laparos: parseInt(document.getElementById('numero_laparos').value) || 0,
     peso_total_ninhada: document.getElementById('peso_total_ninhada').value,
     peso_total_pos_ninhada: document.getElementById('peso_total_pos_ninhada').value,
-    numero_matriz: parseInt(document.getElementById('numero_matriz').value) || null
-  };
+    numero_matriz: document.getElementById('numero_matriz').value || null
+  }
 
   try {
     const targetCoelho = payload.id_coelho || (coelhoId ? parseInt(coelhoId, 10) : null);
