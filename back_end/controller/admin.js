@@ -404,22 +404,20 @@ app.delete('/matriz/:id', async (req, res) => {
 });
 
   // Reprodutor
- app.post('/reprodutor', async (req, res) => {
-    try {
-      // accept either id_coelho or numero_matriz (from older clients)
-      const idCoelho = req.body && (req.body.id_coelho || req.body.numero_matriz);
-      if (!idCoelho) {
-        return res.status(400).json({ erro: 'id_coelho (matriz pai) ou numero_matriz é obrigatório ao criar um reprodutor' });
-      }
-      req.body.id_coelho = parseInt(idCoelho, 10);
-      await ReprodutorRota.adicionarReprodutor(req.body);
-      res.sendStatus(201);
-    } catch (error) {
-      console.error('Erro ao adicionar reprodutor:', error);
-      res.status(500).json({ erro: 'Erro interno' });
+app.post('/reprodutor', async (req, res) => {
+  try {
+    if (!req.body.id_coelho) {
+      return res.status(400).json({ erro: 'id_coelho (matriz pai) é obrigatório ao criar um reprodutor' });
     }
-  });
-
+    req.body.id_coelho = parseInt(req.body.id_coelho, 10);
+    // numero_matriz segue como veio, sem conversão — é texto/código, não precisa virar número
+    await ReprodutorRota.adicionarReprodutor(req.body);
+    res.sendStatus(201);
+  } catch (error) {
+    console.error('Erro ao adicionar reprodutor:', error);
+    res.status(500).json({ erro: 'Erro interno' });
+  }
+});
   app.get('/reprodutor', async (req, res) => {
     console.log('GET /reprodutor - query params:', req.query);
     try {
