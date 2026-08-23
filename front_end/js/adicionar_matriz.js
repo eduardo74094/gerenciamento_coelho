@@ -48,8 +48,8 @@ async function salvar(){
   peso_total_pos_ninhada: (Number.isNaN(parseFloat(document.getElementById('peso_total_pos_ninhada').value)) ? null : parseFloat(document.getElementById('peso_total_pos_ninhada').value)),
     data_desmame: document.getElementById('data_desmame').value || null,
   total_desmame: (Number.isNaN(parseInt(document.getElementById('total_desmame').value)) ? null : parseInt(document.getElementById('total_desmame').value)),
-  numero_reprodutor: (Number.isNaN(parseInt(document.getElementById('numero_reprodutor').value)) ? null : parseInt(document.getElementById('numero_reprodutor').value))
-  };
+ numero_reprodutor: document.getElementById('numero_reprodutor').value || null
+  }
 
   try{
     const targetCoelho = payload.id_coelho || (coelhoId ? parseInt(coelhoId, 10) : null);
