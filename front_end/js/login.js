@@ -1,41 +1,51 @@
+function showToast(mensagem, tipo = "sucesso") {
+  const toast = document.getElementById("toast");
+  toast.textContent = mensagem;
+  toast.className = "toast show" + (tipo === "erro" ? " error" : "");
+  setTimeout(() => {
+    toast.className = "toast";
+  }, 2500);
+}
+
 async function loginUsuario() {
   const form = document.getElementById("loginForm");
   const email = form.email.value.trim();
   const senha = form.senha.value;
 
   if (!email || !senha) {
-    alert("Preencha todos os campos.");
+    showToast("Preencha todos os campos.", "erro");
     return;
   }
 
   try {
     const response = await fetch("/login", {
-  method: "POST",
-  credentials: "include",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ email, senha }),
-});
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, senha }),
+    });
 
     if (response.ok) {
       const data = await response.json();
-      
-      // guardar dados do usuário logado para aplicar regras de UI
+
       try { localStorage.setItem("usuario_atual", JSON.stringify(data.usuario || {})); } catch(e) {}
       localStorage.setItem("id_usuario", data.usuario.id_usuario);
-      
-      alert(data.mensagem);
+
+      showToast(data.mensagem, "sucesso");
+
       const emailLower = (data.usuario.email || '').toLowerCase();
-      if (emailLower === 'admin@gmail.com') {
-        window.location.href = '/admin';
-      } else {
-        window.location.href = '/html/index.html';
-      }
+      setTimeout(() => {
+        if (emailLower === 'admin@gmail.com') {
+          window.location.href = '/admin';
+        } else {
+          window.location.href = '/html/index.html';
+        }
+      }, 1000);
     } else {
-      alert("Email ou senha inválidos.");
+      showToast("Email ou senha inválidos.", "erro");
     }
 
   } catch (error) {
-    alert("Erro na requisição. Tente novamente.");
+    showToast("Erro na requisição. Tente novamente.", "erro");
   }
 }
- 
