@@ -114,7 +114,7 @@ class CoelhoModel {
       reprodutor_coelho = $13,
       situacao_coelho = $14,
       transferido_coelho = $15,
-      foto_coelho = $16
+      foto_coelho = COALESCE($16, foto_coelho)
     WHERE id_coelho = $17
     RETURNING *;
   `;
